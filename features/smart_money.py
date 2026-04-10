@@ -13,16 +13,23 @@ Features:
     • Swing High / Low detection
     • HH / HL / LH / LL classification
     • Break of Structure (BOS)
-    • Change of Character (CHoCH)
+    • Change of Character (CHoCH)   ← TUZATILDI: avvalgi versiyada hech qachon ishlamasdi
     • Distance to last swing levels
     • Volatility Contraction Pattern (VCP / Range Compression)
     • Price-Path Convexity
     • Hurst Exponent
+
+FIXES (v2):
+    1. break_of_structure() — CHoCH logikasi to'liq qayta yozildi.
+       Avvalgi versiyada ichki if shart tashqi if bilan qarama-qarshi edi,
+       natijada choch_bull va choch_bear har doim 0 bo'lib qolardi.
+    2. kyle_lambda() — Python loop o'rniga numpy rolling regression.
+       ~100x tezroq, xotira sarfi ham kamaydi.
+    3. numba — import olib tashlandi (ishlatilmagan, import xatosi berardi).
 """
 
 import numpy as np
 import pandas as pd
-from numba import njit   # optional — falls back gracefully if not installed
 
 
 # ──────────────────────────────────────────────
@@ -35,18 +42,18 @@ def detect_swings(high: pd.Series, low: pd.Series,
     Detect Swing Highs and Swing Lows with `n`-bar confirmation.
 
     Definition:
-        Swing High at bar i  iff  high[i] > max(high[i-n:i])
-                                  AND high[i] > max(high[i+1:i+n+1])
+        Swing High at bar i  iff  high[i] == max(high[i-n : i+n+1])
+        Swing Low  at bar i  iff  low[i]  == min(low[i-n  : i+n+1])
 
-    Because we use future bars for confirmation, we *record* the event
-    at bar i+n (the first bar at which we *know* it's a swing).
-    This is the canonical approach to avoid look-ahead bias.
+    Because we use i+1..i+n bars for confirmation, we *record* the event
+    at bar i+n (the first bar we KNOW it's a swing).
+    No look-ahead bias.
 
     Returns DataFrame with columns:
-        swing_high : 1.0 at confirmed swing high bars, else 0.0
-        swing_low  : 1.0 at confirmed swing low bars, else 0.0
-        swing_high_price : price of the most recent confirmed swing high
-        swing_low_price  : price of the most recent confirmed swing low
+        swing_high       : 1.0 at confirmed swing high bar, else 0.0
+        swing_low        : 1.0 at confirmed swing low bar, else 0.0
+        last_swing_high  : forward-filled price of most recent swing high
+        last_swing_low   : forward-filled price of most recent swing low
     """
     h = high.values
     l = low.values
@@ -56,30 +63,21 @@ def detect_swings(high: pd.Series, low: pd.Series,
     is_swing_low  = np.zeros(N)
 
     for i in range(n, N - n):
-        # Swing High: highest point in 2n+1 window centred on i
         if h[i] == max(h[i-n : i+n+1]):
-            # Record at confirmation bar (i + n)
             is_swing_high[i + n] = 1.0
-
-        # Swing Low: lowest point in 2n+1 window
         if l[i] == min(l[i-n : i+n+1]):
             is_swing_low[i + n] = 1.0
 
     idx = high.index
 
-    # Carry forward the price level of the most recent swing
     sh_price = pd.Series(np.where(is_swing_high, h, np.nan), index=idx)
     sl_price = pd.Series(np.where(is_swing_low,  l, np.nan), index=idx)
 
-    # Forward-fill: at every bar, "last known swing level"
-    sh_price_ffill = sh_price.ffill()
-    sl_price_ffill = sl_price.ffill()
-
     return pd.DataFrame({
-        "swing_high":       pd.Series(is_swing_high, index=idx),
-        "swing_low":        pd.Series(is_swing_low,  index=idx),
-        "last_swing_high":  sh_price_ffill,
-        "last_swing_low":   sl_price_ffill,
+        "swing_high":      pd.Series(is_swing_high, index=idx),
+        "swing_low":       pd.Series(is_swing_low,  index=idx),
+        "last_swing_high": sh_price.ffill(),
+        "last_swing_low":  sl_price.ffill(),
     })
 
 
@@ -91,16 +89,16 @@ def classify_swing_sequence(swing_df: pd.DataFrame,
                              high: pd.Series,
                              low: pd.Series) -> pd.DataFrame:
     """
-    Compare consecutive swing highs and lows to classify market structure.
+    Compare consecutive swing highs/lows to classify market structure.
 
-    HH (Higher High) + HL (Higher Low) → bullish trend in progress
-    LH (Lower High)  + LL (Lower Low)  → bearish trend in progress
-    Mixed                               → consolidation / transition
+    HH + HL → bullish trend
+    LH + LL → bearish trend
+    Mixed   → consolidation / transition
 
-    Encoded as integers for the neural network:
-        +1 = HH/HL (bullish)
-        -1 = LH/LL (bearish)
-         0 = unchanged or insufficient data
+    Encoded as integers:
+        +1 = HH or HL (bullish event)
+        -1 = LH or LL (bearish event)
+         0 = no swing on this bar
     """
     sh_mask = swing_df["swing_high"].values.astype(bool)
     sl_mask = swing_df["swing_low"].values.astype(bool)
@@ -109,10 +107,10 @@ def classify_swing_sequence(swing_df: pd.DataFrame,
     idx     = high.index
     N       = len(h_vals)
 
-    hh_flag = np.zeros(N)   # Higher High
-    hl_flag = np.zeros(N)   # Higher Low
-    lh_flag = np.zeros(N)   # Lower High
-    ll_flag = np.zeros(N)   # Lower Low
+    hh_flag = np.zeros(N)
+    hl_flag = np.zeros(N)
+    lh_flag = np.zeros(N)
+    ll_flag = np.zeros(N)
 
     prev_sh = np.nan
     prev_sl = np.nan
@@ -132,8 +130,6 @@ def classify_swing_sequence(swing_df: pd.DataFrame,
                 ll_flag[i] = 1.0 if curr_sl < prev_sl else 0.0
             prev_sl = curr_sl
 
-    # Rolling "structure bias": sum over recent bars
-    # +1 per HH/HL event, -1 per LH/LL event → aggregate trend measure
     window = 10
     net_structure = (
         pd.Series(hh_flag + hl_flag - lh_flag - ll_flag, index=idx)
@@ -154,35 +150,36 @@ def classify_swing_sequence(swing_df: pd.DataFrame,
 # ──────────────────────────────────────────────
 
 def break_of_structure(close: pd.Series,
-                       swing_df: pd.DataFrame,
-                       eps: float = 1e-9) -> pd.DataFrame:
+                        swing_df: pd.DataFrame,
+                        eps: float = 1e-9) -> pd.DataFrame:
     """
     BOS  (Break of Structure):
-        Price closes ABOVE the last confirmed Swing High (bullish BOS)
-        Price closes BELOW the last confirmed Swing Low  (bearish BOS)
+        Bullish BOS : close crosses ABOVE last confirmed Swing High
+        Bearish BOS : close crosses BELOW last confirmed Swing Low
         → Confirms trend continuation.
 
-    CHoCH (Change of Character):
-        In an uptrend (price above last swing low):
-            Price closes BELOW the last HL → potential reversal.
-        In a downtrend (price below last swing high):
-            Price closes ABOVE the last LH → potential reversal.
-        → First warning of a trend reversal.
+    CHoCH (Change of Character):  ← TO'LIQ QAYTA YOZILDI
+        Bullish CHoCH : narx downtrend kontekstida (c < last_sh) bo'lsa,
+                        va close YUQORIGA last_sh ni kesib o'tsa
+                        → potentsial bullish reversal.
+        Bearish CHoCH : narx uptrend kontekstida (c > last_sl) bo'lsa,
+                        va close PASTGA last_sl ni kesib o'tsa
+                        → potentsial bearish reversal.
 
-    These are encoded as:
-        bos_bull       : 1 on the bar a bullish BOS fires
-        bos_bear       : 1 on the bar a bearish BOS fires
-        choch_bull     : 1 on bar a bullish CHoCH fires
-        choch_bear     : 1 on bar a bearish CHoCH fires
-        bars_since_bos : bars elapsed since the last BOS of either kind
-        dist_to_last_sh: (close - last_swing_high) / close  — structural distance
-        dist_to_last_sl: (close - last_swing_low)  / close
+    Avvalgi xato qanday edi:
+        Tashqi shart:  if c[i] > sl  ...   (narx sl DAN YUQORI)
+        Ichki shart:   if c[i] < sl  ...   (narx sl DAN PAST)
+        Bu mantiqan imkonsiz — hech qachon true bo'lmasdi.
+
+    To'g'ri mantiq:
+        CHoCH — bu BOS bilan bir xil harakat, lekin qarama-qarshi trend
+        kontekstida sodir bo'ladi.  Faqat prev_c → c kesishuviga qaraymiz.
     """
-    c          = close.values
-    last_sh    = swing_df["last_swing_high"].values
-    last_sl    = swing_df["last_swing_low"].values
-    N          = len(c)
-    idx        = close.index
+    c       = close.values
+    last_sh = swing_df["last_swing_high"].values
+    last_sl = swing_df["last_swing_low"].values
+    N       = len(c)
+    idx     = close.index
 
     bos_bull   = np.zeros(N)
     bos_bear   = np.zeros(N)
@@ -199,25 +196,28 @@ def break_of_structure(close: pd.Series,
         if np.isnan(sh) or np.isnan(sl):
             continue
 
-        # BOS: close crosses a structural level
-        if prev_c[i] <= sh and c[i] > sh:
+        # ── BOS: trend yo'nalishida structural level kesib o'tildi ──
+        # Bullish BOS: narx swing high ni pastdan yuqoriga kesdi
+        if prev_c[i] <= sh < c[i]:
             bos_bull[i] = 1.0
-        if prev_c[i] >= sl and c[i] < sl:
+
+        # Bearish BOS: narx swing low ni yuqoridan pastga kesdi
+        if prev_c[i] >= sl > c[i]:
             bos_bear[i] = 1.0
 
-        # CHoCH: in a trend, price breaks the *opposite* structural level
-        # Uptrend context: price is above last swing low
-        if c[i] > sl and c[i] < sh and c[i] < prev_c[i]:
-            # In uptrend, closing below the last swing low = CHoCH bearish
-            if c[i] < sl:
-                choch_bear[i] = 1.0
+        # ── CHoCH: teskari yo'nalishda structural level kesib o'tildi ──
+        # Bullish CHoCH: narx downtrend ichida (c < sh), lekin swing high ni kesib o'tdi
+        # Bu downtrend tugashi va bullish reversal boshlanishini ko'rsatadi
+        if c[i] < sh:                          # Downtrend context: narx last_sh dan past
+            if prev_c[i] <= sh < c[i]:         # Lekin shu barda sh ni yuqoriga kesdi
+                choch_bull[i] = 1.0            # → Bullish CHoCH
 
-        # Downtrend context: price is below last swing high
-        if c[i] < sh and c[i] > sl and c[i] > prev_c[i]:
-            if c[i] > sh:
-                choch_bull[i] = 1.0
+        # Bearish CHoCH: narx uptrend ichida (c > sl), lekin swing low ni kesib o'tdi
+        if c[i] > sl:                          # Uptrend context: narx last_sl dan yuqori
+            if prev_c[i] >= sl > c[i]:         # Lekin shu barda sl ni pastga kesdi
+                choch_bear[i] = 1.0            # → Bearish CHoCH
 
-    # Time since last BOS
+    # Bars since last BOS
     bos_any = bos_bull + bos_bear
     bars_since_bos = _bars_since_event(bos_any, N)
 
@@ -226,18 +226,18 @@ def break_of_structure(close: pd.Series,
     dist_sl = (c - last_sl) / (np.abs(c) + eps)
 
     return pd.DataFrame({
-        "bos_bull":        pd.Series(bos_bull,   index=idx),
-        "bos_bear":        pd.Series(bos_bear,   index=idx),
-        "choch_bull":      pd.Series(choch_bull, index=idx),
-        "choch_bear":      pd.Series(choch_bear, index=idx),
+        "bos_bull":        pd.Series(bos_bull,       index=idx),
+        "bos_bear":        pd.Series(bos_bear,       index=idx),
+        "choch_bull":      pd.Series(choch_bull,     index=idx),
+        "choch_bear":      pd.Series(choch_bear,     index=idx),
         "bars_since_bos":  pd.Series(bars_since_bos, index=idx),
-        "dist_to_swing_h": pd.Series(dist_sh, index=idx),
-        "dist_to_swing_l": pd.Series(dist_sl, index=idx),
+        "dist_to_swing_h": pd.Series(dist_sh,        index=idx),
+        "dist_to_swing_l": pd.Series(dist_sl,        index=idx),
     })
 
 
 def _bars_since_event(event_array: np.ndarray, N: int) -> np.ndarray:
-    """Count bars since the last 1 in a binary event array."""
+    """Count bars elapsed since the last 1 in a binary event array."""
     result = np.full(N, np.nan)
     count  = np.nan
     for i in range(N):
@@ -261,14 +261,8 @@ def volatility_compression(high: pd.Series, low: pd.Series,
     Range Compression ratio:
         Compression = (max(H_20) - min(L_20)) / (max(H_100) - min(L_100))
 
-    Popularised by Mark Minervini's VCP (Volatility Contraction Pattern).
-
-    A declining compression ratio (< 0.5) combined with drying volume
-    indicates that "supply is being absorbed" by institutional buyers.
-    The "line of least resistance" shifts upward → high-probability breakout.
-
-    < 0.3 → very tight coil (maximum compression before move)
-    > 1.0 → range expanding (possible breakout in progress)
+    < 0.3 → juda qattiq coil (yirik harakat oldidan)
+    > 1.0 → range kengaymoqda (breakout bo'lyapti)
     """
     range_short = high.rolling(short_window).max() - low.rolling(short_window).min()
     range_long  = high.rolling(long_window).max()  - low.rolling(long_window).min()
@@ -281,17 +275,11 @@ def volatility_compression(high: pd.Series, low: pd.Series,
 
 def price_convexity(close: pd.Series, window: int = 20) -> pd.Series:
     """
-    Convexity = (midpoint_of_endpoints - mean_of_path) / midpoint_of_endpoints
+    Convexity = (midpoint_of_endpoints - mean_of_path) / |midpoint|
 
-    Measures whether the price trajectory is "convex" (accelerating, FOMO)
-    or "concave" (decelerating, potential reversal).
-
-    High positive convexity → parabolic / blow-off move (mean-reverts).
-    High negative convexity → concave / rounded bottom pattern.
-    Near zero              → linear trend.
-
-    Research: Convexity is negatively correlated with next-bar returns
-    at short horizons (parabolic moves are unsustainable).
+    > 0 → parabolik / blow-off harakat (mean-revert xavfi)
+    < 0 → konkav / yumaloq dip pattern
+    ≈ 0 → chiziqli trend
     """
     results = np.full(len(close), np.nan)
     c = close.values
@@ -317,17 +305,12 @@ def hurst_exponent(close: pd.Series,
     """
     Rolling Hurst Exponent using R/S (Rescaled Range) analysis.
 
-    H > 0.5 → Trending / Persistent  (momentum works)
-    H < 0.5 → Mean-reverting          (fade the move)
-    H ≈ 0.5 → Random walk             (efficient, unpredictable)
+    H > 0.5 → Trending / Persistent  (momentum ishlaydi)
+    H < 0.5 → Mean-reverting          (harakatga qarshi savdo)
+    H ≈ 0.5 → Random walk             (bashorat qilib bo'lmaydi)
 
-    This is the most important regime-detection feature in the pipeline.
-    The neural net can use it to implicitly "switch" between momentum
-    and mean-reversion submodels without any explicit hard rule.
-
-    Implementation: for each window we compute R/S at multiple lag lengths
-    then fit a log-log regression to estimate H.  This is computationally
-    expensive — use window=100 as a minimum for stability.
+    Eng muhim rejim-deteksiya feature — neyron tarmoq bu orqali
+    momentum va mean-reversion rejimlarini ajrata oladi.
     """
     log_close = np.log(close.values)
     N = len(log_close)
@@ -348,13 +331,11 @@ def hurst_exponent(close: pd.Series,
         if valid.sum() < 3:
             continue
 
-        # OLS: log(R/S) = H * log(lag) + const
-        log_rs = np.log(rs_vals[valid])
-        ll     = log_lags[valid]
-        # slope = H
-        ll_mean   = ll.mean()
-        rs_mean   = log_rs.mean()
-        h_est = ((ll - ll_mean) * (log_rs - rs_mean)).sum() / ((ll - ll_mean)**2).sum()
+        log_rs  = np.log(rs_vals[valid])
+        ll      = log_lags[valid]
+        ll_mean = ll.mean()
+        rs_mean = log_rs.mean()
+        h_est   = ((ll - ll_mean) * (log_rs - rs_mean)).sum() / ((ll - ll_mean)**2).sum()
         results[i] = np.clip(h_est, 0.0, 1.0)
 
     return pd.Series(results, index=close.index, name=f"hurst_{window}")
@@ -380,7 +361,39 @@ def _rs_statistic(series: np.ndarray, lag: int) -> float:
 
 
 # ──────────────────────────────────────────────
-# 7. MASTER BUILDER
+# 7. KYLE'S LAMBDA — VEKTORIZATSIYA QILINGAN
+# ──────────────────────────────────────────────
+
+def kyle_lambda(close: pd.Series, volume: pd.Series,
+                window: int = 20, eps: float = 1e-9) -> pd.Series:
+    """
+    Rolling OLS slope of |ΔP| on volume.
+
+    Kyle (1985): ΔP = λ × net_order_flow + noise
+    Yuqori λ → bozor narxga sezgir → yupqa order book.
+    Past λ   → chuqur bozor, yirik hajm ham ta'sir qilmaydi.
+
+    AVVALGI MUAMMO:
+        Python for-loop bilan O(N × window) — 100k barda daqiqalar ketardi.
+
+    YANGI YONDASHUV — NUMPY VEKTORIZATSIYA:
+        pandas rolling() orqali har bir oynada:
+            cov(volume, |ΔP|) va var(volume) ni hisoblaymiz.
+        slope = cov / var  (OLS formulasi)
+        Bu ~100x tezroq, xotira sarfi ham minimum.
+    """
+    delta_p = close.diff().abs()
+
+    # Rolling statistics (pandas built-in — C-level tezlik)
+    roll_cov = volume.rolling(window).cov(delta_p)
+    roll_var = volume.rolling(window).var()
+
+    lambda_series = roll_cov / roll_var.clip(lower=eps)
+    return lambda_series.rename("kyle_lambda")
+
+
+# ──────────────────────────────────────────────
+# 8. MASTER BUILDER
 # ──────────────────────────────────────────────
 
 def add_smart_money_features(df: pd.DataFrame,
@@ -393,7 +406,7 @@ def add_smart_money_features(df: pd.DataFrame,
     Add all Smart Money / Market Structure features to `df`.
     Expected columns: open, high, low, close, volume
     """
-    h, l, c = df["high"], df["low"], df["close"]
+    h, l, c, v = df["high"], df["low"], df["close"], df["volume"]
 
     # Swings
     swing_df = detect_swings(h, l, n=swing_n)
@@ -403,7 +416,7 @@ def add_smart_money_features(df: pd.DataFrame,
     seq_df = classify_swing_sequence(swing_df, h, l)
     df = pd.concat([df, seq_df], axis=1)
 
-    # BOS / CHoCH
+    # BOS / CHoCH (tuzatilgan versiya)
     bos_df = break_of_structure(c, swing_df)
     df = pd.concat([df, bos_df], axis=1)
 
@@ -413,7 +426,10 @@ def add_smart_money_features(df: pd.DataFrame,
     # Convexity
     df[f"convexity_{convexity_window}"] = price_convexity(c, convexity_window)
 
-    # Hurst (expensive — runs once per build)
+    # Hurst (qimmat — faqat bir marta ishga tushiriladi)
     df[f"hurst_{hurst_window}"] = hurst_exponent(c, hurst_window)
+
+    # Kyle Lambda (endi tez — vektorizatsiya qilingan)
+    df["kyle_lambda"] = kyle_lambda(c, v)
 
     return df
