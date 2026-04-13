@@ -228,33 +228,14 @@ def on_balance_volume(close: pd.Series, volume: pd.Series) -> pd.Series:
 def kyle_lambda(close: pd.Series, volume: pd.Series,
                 window: int = 20, eps: float = 1e-9) -> pd.Series:
     """
-    Rolling regression slope of |ΔP| on volume.
-
-    Kyle (1985) showed the price impact of order flow is:
-        ΔP = λ × (V_buy - V_sell) + noise
-
-    We approximate λ via OLS on a rolling window.
-    High λ → market is sensitive to volume → thin order book.
-    Low  λ → deep market, large trades absorbed with minimal impact.
+    Rolling OLS slope of |ΔP| on volume — VEKTORIZATSIYA.
+    Kyle (1985): ΔP = λ × net_order_flow + noise
+    numpy rolling orqali ~100x tezroq.
     """
     delta_p = close.diff().abs()
-    results = []
-
-    for i in range(len(close)):
-        if i < window:
-            results.append(np.nan)
-            continue
-        y = delta_p.iloc[i-window:i].values
-        x = volume.iloc[i-window:i].values
-        # OLS: slope = cov(x,y) / var(x)
-        xm, ym = x.mean(), y.mean()
-        var_x = ((x - xm)**2).mean()
-        cov_xy = ((x - xm) * (y - ym)).mean()
-        slope = cov_xy / (var_x + eps)
-        results.append(slope)
-
-    return pd.Series(results, index=close.index, name="kyle_lambda")
-
+    roll_cov = volume.rolling(window).cov(delta_p)
+    roll_var = volume.rolling(window).var()
+    return (roll_cov / roll_var.clip(lower=eps)).rename("kyle_lambda")
 
 # ──────────────────────────────────────────────
 # 8. MASTER BUILDER
