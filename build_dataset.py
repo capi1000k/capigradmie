@@ -30,7 +30,7 @@ from features import (
     add_smart_money_features,
     add_time_features,
 )
-from target import build_targets
+from target import triple_barrier
 
 
 # ──────────────────────────────────────────────
@@ -389,9 +389,8 @@ def build_dataset():
     # 5. Target labellar
     print("\n── Target labellar hisoblanmoqda ──")
     t0 = time.time()
-    labels = build_targets(
-        m15_raw, h1_raw,
-        verbose=True,
+    labels = triple_barrier(
+        m15_raw,
         **TARGET_PARAMS
     )
     print(f"  Vaqt: {time.time()-t0:.1f}s")
