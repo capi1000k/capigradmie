@@ -1,0 +1,22 @@
+# Data — katta fayllar GitHub ga kirmaydi
+data/*.parquet
+data/*.csv
+data/*.png
+
+# Model fayllar — katta
+model/*.pt
+model/*.pkl
+
+# Environment
+.env
+*.pyc
+__pycache__/
+.venv/
+
+# Live trading logs — shaxsiy
+live/*.log
+live/*.csv
+live/*.png
+
+# Backup
+*_backup.py
