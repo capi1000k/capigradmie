@@ -313,6 +313,7 @@ def hurst_exponent(close: pd.Series,
     momentum va mean-reversion rejimlarini ajrata oladi.
     """
     log_close = np.log(close.values)
+    returns   = np.diff(log_close)  # R/S returns ustida ishlashi kerak
     N = len(log_close)
     results = np.full(N, np.nan)
 
@@ -320,7 +321,8 @@ def hurst_exponent(close: pd.Series,
     log_lags = np.log(lags)
 
     for i in range(window, N):
-        segment = log_close[i - window : i]
+        # Returns: [i-window, i] oralig'i
+        segment = returns[i - window : i]
         rs_vals = []
         for lag in lags:
             rs = _rs_statistic(segment, lag)
