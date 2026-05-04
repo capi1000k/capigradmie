@@ -123,14 +123,19 @@ def get_features(client, features, scaler_mean, scaler_std, hurst_cache):
     m15_f['convexity_20']    = price_convexity(c_sm)
     m15_f['kyle_lambda']     = kyle_lambda(c_sm, v_sm)
 
-    # Hurst — cache dan oxirgi mavjud qiymat
-    if current_time in hurst_cache.index:
-        m15_f['hurst_100'] = hurst_cache.loc[current_time, 'hurst_100']
+    # Hurst — cache dan timezone normalizatsiya bilan
+    cache_naive = hurst_cache.copy()
+    cache_naive.index = cache_naive.index.tz_localize(None) if cache_naive.index.tzinfo is None else cache_naive.index.tz_convert(None)
+    current_naive = current_time.replace(tzinfo=None)
+
+    if current_naive in cache_naive.index:
+        m15_f['hurst_100'] = cache_naive.loc[current_naive, 'hurst_100']
+        log.info(f"Hurst cache dan olindi: {cache_naive.loc[current_naive, 'hurst_100']:.3f}")
     else:
-        # Cache da yo'q — oxirgi mavjud qiymatni ishlatamiz
-        last_hurst = hurst_cache['hurst_100'].dropna().iloc[-1]
+        # Cache da yo'q — asosiy dataset dan oxirgi qiymat
+        last_hurst = cache_naive['hurst_100'].dropna().iloc[-1]
         m15_f['hurst_100'] = last_hurst
-        log.warning(f"Hurst cache da yo'q — oxirgi qiymat: {last_hurst:.3f}")
+        log.warning(f"Hurst cache mos kelmadi — oxirgi: {last_hurst:.3f}")
 
     m15_f = add_time_features(m15_f, bar_minutes=15)
     m15_f = m15_f.drop(
@@ -154,12 +159,14 @@ def get_features(client, features, scaler_mean, scaler_std, hurst_cache):
     h1_f['kyle_lambda']     = kyle_lambda(c_h1, v_h1)
 
     # H1 Hurst — cache dan
-    h1_last_time = h1.index[-1]
-    if h1_last_time in hurst_cache.index:
-        h1_f['hurst_100'] = hurst_cache.loc[h1_last_time, 'h1_hurst_100']
+    h1_last_naive = h1.index[-1].replace(tzinfo=None)
+    if h1_last_naive in cache_naive.index:
+        h1_f['hurst_100'] = cache_naive.loc[h1_last_naive, 'h1_hurst_100']
+        log.info(f"H1 Hurst cache dan: {cache_naive.loc[h1_last_naive, 'h1_hurst_100']:.3f}")
     else:
-        last_h1_hurst = hurst_cache['h1_hurst_100'].dropna().iloc[-1]
+        last_h1_hurst = cache_naive['h1_hurst_100'].dropna().iloc[-1]
         h1_f['hurst_100'] = last_h1_hurst
+        log.warning(f"H1 Hurst cache mos kelmadi — oxirgi: {last_h1_hurst:.3f}")
 
     h1_f = h1_f.drop(
         columns=['open','high','low','close','volume'], errors='ignore')
