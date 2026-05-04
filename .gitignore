@@ -20,3 +20,4 @@ live/*.png
 
 # Backup
 *_backup.py
+llama.cpp/
