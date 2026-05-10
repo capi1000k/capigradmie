@@ -131,7 +131,8 @@ def build_features(df: pd.DataFrame,
 
 def align_to_m15(htf_features: pd.DataFrame,
                  m15_index: pd.DatetimeIndex,
-                 prefix: str) -> pd.DataFrame:
+                 prefix: str,
+                 tf_hours: int = 0) -> pd.DataFrame:
     """
     H1 yoki H4 featurelarni M15 ga forward-fill qilish.
 
@@ -146,6 +147,9 @@ def align_to_m15(htf_features: pd.DataFrame,
     """
     print(f"\n── {prefix.upper()} M15 ga align ──")
 
+    if tf_hours > 0:
+        htf_features = htf_features.copy()
+        htf_features.index = htf_features.index + pd.Timedelta(hours=tf_hours)
     htf_renamed  = htf_features.add_prefix(prefix)
     combined_idx = htf_renamed.index.union(m15_index).sort_values()
 
@@ -221,8 +225,8 @@ def build_dataset():
     h4_feat  = build_features(h4_raw,  "H4",  bar_minutes=240, add_time=False)
 
     # ── 3. HTF → M15 align ──
-    h1_aligned = align_to_m15(h1_feat, m15_raw.index, prefix="h1_")
-    h4_aligned = align_to_m15(h4_feat, m15_raw.index, prefix="h4_")
+    h1_aligned = align_to_m15(h1_feat, m15_raw.index, prefix="h1_", tf_hours=1)
+    h4_aligned = align_to_m15(h4_feat, m15_raw.index, prefix="h4_", tf_hours=4)
 
     # ── 4. Labels ──
     print("\n── Triple Barrier labels ──")
