@@ -1,14 +1,27 @@
 """
 microstructure.py
 =================
-Institutional-grade market microstructure proxies derived *solely* from OHLCV.
+Institutional-grade market microstructure proxies — faqat OHLCV dan.
 
-Without Level-2 order book data we cannot directly observe bid-ask spreads,
-order-flow imbalance, or market depth.  The features in this module are
-econometric proxies that approximate those quantities using price and volume —
-validated in academic literature and used by systematic hedge funds.
+Level-2 order book yo'q, shuning uchun akademik adabiyotda
+tasdiqlangan econometric proxylardan foydalanamiz.
 
-References embedded in docstrings below.
+Avvalgi versiyadan farqi:
+    • volume_delta        — raw volume emas, rolling mean ga normalize
+    • bvc_buy_vol/sell_vol — olib tashlandi (raw volume, non-stationary)
+    • bvc_imbalance       — qoldirildi (o'zi normalized ∈ [-1, +1])
+    • bvc_delta           — normalize qilingan versiyasi qo'shildi
+
+Featurelar:
+    roll_spread           — bid-ask spread proxy (Roll 1984)
+    amihud_illiq          — price impact per dollar volume (Amihud 2002)
+    volume_delta_norm     — signed volume / rolling mean volume
+    volume_delta_ratio_14 — rolling net order flow ∈ [-1, +1]
+    bvc_imbalance         — Bulk Volume Classification imbalance
+    bvc_delta_norm        — normalize qilingan BVC delta
+    effort_vs_result      — Wyckoff effort vs result (log)
+    obv_zscore            — On-Balance Volume z-score
+    kyle_lambda           — price impact slope (Kyle 1985)
 """
 
 import numpy as np
@@ -16,40 +29,23 @@ import pandas as pd
 
 
 # ──────────────────────────────────────────────
-# 1. ROLL SPREAD ESTIMATOR
+# 1. ROLL SPREAD
 # ──────────────────────────────────────────────
 
 def roll_spread(close: pd.Series,
-                window: int = 20,
-                eps: float = 1e-9) -> pd.Series:
+                window: int = 20) -> pd.Series:
     """
     Roll (1984) effective spread estimator.
 
-    Theory:  In an efficient market, the bid-ask bounce causes *negative*
-    serial autocorrelation in price changes.  Roll showed:
+    s = 2 × sqrt(|Cov(ΔP_t, ΔP_{t-1})|) × sign(-Cov)
 
-        s = 2 * sqrt(-Cov(ΔP_t, ΔP_{t-1}))
-
-    Why it matters:
-        • Proxy for transaction costs / liquidity conditions.
-        • A widening Roll spread often precedes a liquidity crisis or
-          high-volatility spike event.
-        • Useful as a regime filter: tight spread = liquid & healthy;
-          wide spread = fragile, slippage risk.
-
-    Implementation note:
-        When the covariance is positive (trending, not mean-reverting),
-        the standard formula is undefined (sqrt of negative).  We use
-        the "Absolute Roll" modification: take |cov| and preserve the sign
-        so the feature stays real-valued.  Positive = trending regime;
-        negative = mean-reverting / noisy regime.
+    Musbat → trending rejim
+    Manfiy → mean-reverting / shovqinli rejim
+    Kengaygan spread → liquidity krizi yoki volatilite spike oldidan
     """
-    lr = np.log(close).diff()
+    lr  = np.log(close).diff()
     cov = lr.rolling(window).cov(lr.shift(1))
-
-    # Absolute Roll: 2*sqrt(|cov|) * sign(-cov)
-    spread = 2 * np.sqrt(cov.abs()) * np.sign(-cov)
-    return spread.rename("roll_spread")
+    return (2 * np.sqrt(cov.abs()) * np.sign(-cov)).rename("roll_spread")
 
 
 # ──────────────────────────────────────────────
@@ -61,69 +57,60 @@ def amihud_illiquidity(close: pd.Series,
                        window: int = 20,
                        eps: float = 1e-9) -> pd.Series:
     """
-    Amihud (2002) illiquidity ratio.
+    Amihud (2002): ILLIQ = |R_t| / (Volume × Price)
 
-        ILLIQ_t = |R_t| / (Volume_t × Price_t)
+    Dollar hajmiga nisbatan narx qanchalik harakat qiladi?
+    Yuqori → yupqa bozor, slippage xavfi
+    Past   → chuqur bozor, katta hajm ham ta'sir qilmaydi
 
-    Why it matters:
-        Measures price *impact* per unit of dollar volume — i.e., how much
-        price moves per dollar traded.  High ILLIQ = thin market where
-        even moderate volume causes large price shifts ("slippage-prone").
-
-        For a deep-learning model this is a "Market Impact" proxy:
-        high ILLIQ bars suggest price moves may be fragile and easily reversed
-        when the volume dries up.
-
-    We smooth with a rolling mean to reduce bar-level noise.
+    Log-transform: extreme qiymatlarni jilovlash uchun.
     """
-    log_ret = np.log(close).diff().abs()
+    log_ret    = np.log(close).diff().abs()
     dollar_vol = (volume * close).clip(lower=eps)
-    illiq_raw = log_ret / dollar_vol
-
-    # Rolling mean to get the "regime" level of illiquidity
-    illiq_smooth = illiq_raw.rolling(window).mean()
-
-    # Log-transform for heavy tails (ILLIQ has extreme values occasionally)
-    return np.log1p(illiq_smooth).rename("amihud_illiq")
+    illiq_raw  = log_ret / dollar_vol
+    illiq_sm   = illiq_raw.rolling(window).mean()
+    return np.log1p(illiq_sm).rename("amihud_illiq")
 
 
 # ──────────────────────────────────────────────
-# 3. VOLUME DELTA PROXY (Order Flow Direction)
+# 3. VOLUME DELTA — NORMALIZE QILINGAN
 # ──────────────────────────────────────────────
 
-def volume_delta(close: pd.Series, volume: pd.Series) -> pd.Series:
+def volume_delta_norm(close: pd.Series,
+                      volume: pd.Series,
+                      window: int = 20,
+                      eps: float = 1e-9) -> pd.Series:
     """
-    Signed volume proxy:
-        delta_t = sign(close_t - close_{t-1}) × volume_t
+    sign(ΔClose) × Volume / rolling_mean(Volume)
 
-    A simplified proxy for "net aggressive volume":
-        + → buyers dominated (net buying pressure)
-        - → sellers dominated (net selling pressure)
+    Avvalgi versiya: sign × Volume → raw, non-stationary ❌
+    Yangi versiya: rolling mean ga normalize → stationary ✅
 
-    Why it matters:
-        Raw volume is unsigned — it doesn't tell you who initiated the trade.
-        By signing with the price direction we get a crude but effective
-        measure of order flow imbalance.  Sustained positive delta during
-        a consolidation = institutional accumulation.
+    > 1  → o'rtacha dan yuqori buying pressure
+    < -1 → o'rtacha dan yuqori selling pressure
+    ≈ 0  → muvozanat
     """
-    direction = np.sign(close.diff())
-    return (direction * volume).rename("volume_delta")
+    direction    = np.sign(close.diff())
+    signed_vol   = direction * volume
+    rolling_mean = volume.rolling(window).mean().clip(lower=eps)
+    return (signed_vol / rolling_mean).rename("volume_delta_norm")
 
 
-def volume_delta_ratio(close: pd.Series, volume: pd.Series,
-                       window: int = 14, eps: float = 1e-9) -> pd.Series:
+def volume_delta_ratio(close: pd.Series,
+                       volume: pd.Series,
+                       window: int = 14,
+                       eps: float = 1e-9) -> pd.Series:
     """
-    Rolling sum of volume delta / rolling sum of total volume.
+    Rolling sum(signed_vol) / rolling sum(vol) ∈ [-1, +1]
 
-    Normalises the raw delta into [-1, +1].
-        > +0.5  → strong buying dominance
-        < -0.5  → strong selling dominance
-        ≈  0    → balanced / uncertain market
+    > +0.5 → kuchli buying dominance
+    < -0.5 → kuchli selling dominance
+    ≈  0   → muvozanat
     """
-    delta = volume_delta(close, volume)
-    roll_delta = delta.rolling(window).sum()
-    roll_vol   = volume.rolling(window).sum().clip(lower=eps)
-    return (roll_delta / roll_vol).rename(f"volume_delta_ratio_{window}")
+    signed_vol  = np.sign(close.diff()) * volume
+    roll_signed = signed_vol.rolling(window).sum()
+    roll_vol    = volume.rolling(window).sum().clip(lower=eps)
+    return (roll_signed / roll_vol).rename(f"volume_delta_ratio_{window}")
 
 
 # ──────────────────────────────────────────────
@@ -137,30 +124,22 @@ def bulk_volume_classification(close: pd.Series,
     """
     Easley et al. Bulk Volume Classification.
 
-        V_buy  = V_total × Φ(ΔP / σ_ΔP)
-        V_sell = V_total - V_buy
-        Delta  = V_buy - V_sell
+        V_buy  = V × Φ(ΔP / σ_ΔP)
+        V_sell = V - V_buy
+        delta  = V_buy - V_sell
 
-    Where Φ is the standard normal CDF.
+    Normal CDF orqali narx harakati kattaligiga qarab
+    har bir barni buy/sell ga ajratadi.
 
-    Why it matters:
-        More principled than simple price-direction signing.
-        Uses the *magnitude* of the price change to weight buy vs sell
-        probability — a large up-move classifies more volume as buy-initiated.
-
-    Returns:
-        bvc_buy_vol   : estimated buy volume
-        bvc_sell_vol  : estimated sell volume
-        bvc_delta     : V_buy - V_sell  (signed imbalance)
-        bvc_imbalance : delta / total_vol ∈ [-1, +1]
+    Qaytariladi:
+        bvc_imbalance  ∈ [-1, +1]  — asosiy feature (stationary ✅)
+        bvc_delta_norm             — delta / rolling_mean_vol (stationary ✅)
     """
-    from scipy.special import ndtr  # standard normal CDF (fast C implementation)
+    from scipy.special import ndtr
 
     delta_p = close.diff()
     sigma   = delta_p.rolling(window).std().clip(lower=eps)
-
-    z_score  = delta_p / sigma
-    phi      = pd.Series(ndtr(z_score), index=close.index)   # P(buy)
+    phi     = pd.Series(ndtr(delta_p / sigma), index=close.index)
 
     v_buy  = volume * phi
     v_sell = volume * (1 - phi)
@@ -168,11 +147,13 @@ def bulk_volume_classification(close: pd.Series,
 
     imbalance = delta / volume.clip(lower=eps)
 
+    # delta normalize: rolling mean volume ga bo'lamiz
+    roll_mean_vol = volume.rolling(window).mean().clip(lower=eps)
+    delta_norm    = delta / roll_mean_vol
+
     return pd.DataFrame({
-        "bvc_buy_vol":   v_buy,
-        "bvc_sell_vol":  v_sell,
-        "bvc_delta":     delta,
-        "bvc_imbalance": imbalance,
+        "bvc_imbalance":  imbalance,
+        "bvc_delta_norm": delta_norm,
     }, index=close.index)
 
 
@@ -180,92 +161,95 @@ def bulk_volume_classification(close: pd.Series,
 # 5. EFFORT vs RESULT
 # ──────────────────────────────────────────────
 
-def effort_vs_result(close: pd.Series, volume: pd.Series,
+def effort_vs_result(close: pd.Series,
+                     volume: pd.Series,
                      eps: float = 1e-9) -> pd.Series:
     """
-    Volume / |ΔClose|
+    log(Volume / |ΔClose|)
 
-    "Effort" (volume) relative to "Result" (price change).
+    Wyckoff prinsipi: hajm (effort) vs narx harakati (result).
+    Yuqori → katta hajm kam harakat → qarshilik / absorption
+    Past   → kichik hajm katta harakat → thin market / FOMO
 
-    High ratio → much volume required to move price → resistance / absorption.
-    Low  ratio → price moves easily on little volume → thin liquidity / FOMO.
-
-    Inspired by Wyckoff's "Effort vs. Result" principle used by
-    institutional tape readers since the 1930s.
+    Log-transform: ratio ko'p tartibga farq qilishi mumkin.
     """
     price_change = close.diff().abs().clip(lower=eps)
     evr = volume / price_change
-
-    # Log-transform: ratio spans many orders of magnitude
     return np.log1p(evr).rename("effort_vs_result")
 
 
 # ──────────────────────────────────────────────
-# 6. OBV (On-Balance Volume)
+# 6. OBV Z-SCORE
 # ──────────────────────────────────────────────
 
-def on_balance_volume(close: pd.Series, volume: pd.Series) -> pd.Series:
+def on_balance_volume(close: pd.Series,
+                      volume: pd.Series) -> pd.Series:
     """
-    Classic OBV — cumulative signed volume.
+    OBV z-score — rolling normalized.
 
-    We return the *slope* of OBV (change per bar) rather than the
-    raw cumulative value, which is non-stationary.
+    Raw OBV kumulativ → non-stationary.
+    Z-score: (OBV - rolling_mean) / rolling_std → stationary ✅
 
-    OBV slope diverging from price slope → order flow leading / lagging
-    price — a powerful confirmation / divergence signal.
+    OBV narxdan oldinda o'ssa → institutional accumulation
+    OBV narxdan orqada qolsa → distribution (sotish)
     """
     direction = np.sign(close.diff()).fillna(0)
-    obv = (direction * volume).cumsum()
-    # Normalise by rolling std so it's stationary and scale-free
-    obv_std = obv.rolling(50).std().clip(lower=1e-9)
-    return ((obv - obv.rolling(50).mean()) / obv_std).rename("obv_zscore")
+    obv       = (direction * volume).cumsum()
+    obv_mean  = obv.rolling(50).mean()
+    obv_std   = obv.rolling(50).std().clip(lower=1e-9)
+    return ((obv - obv_mean) / obv_std).rename("obv_zscore")
 
 
 # ──────────────────────────────────────────────
-# 7. KYLE'S LAMBDA (PRICE IMPACT SLOPE)
+# 7. KYLE'S LAMBDA
 # ──────────────────────────────────────────────
 
-def kyle_lambda(close: pd.Series, volume: pd.Series,
-                window: int = 20, eps: float = 1e-9) -> pd.Series:
+def kyle_lambda(close: pd.Series,
+                volume: pd.Series,
+                window: int = 20,
+                eps: float = 1e-9) -> pd.Series:
     """
-    Rolling OLS slope of |ΔP| on volume — VEKTORIZATSIYA.
+    Rolling OLS slope: |ΔP| ~ Volume
+
     Kyle (1985): ΔP = λ × net_order_flow + noise
-    numpy rolling orqali ~100x tezroq.
+    Yuqori λ → narx hajmga sezgir → yupqa order book
+    Past λ   → chuqur bozor
+
+    Vektorizatsiya: pandas rolling cov/var orqali (~100x tezroq loop dan).
     """
-    delta_p = close.diff().abs()
+    delta_p  = close.diff().abs()
     roll_cov = volume.rolling(window).cov(delta_p)
     roll_var = volume.rolling(window).var()
     return (roll_cov / roll_var.clip(lower=eps)).rename("kyle_lambda")
 
+
 # ──────────────────────────────────────────────
-# 8. MASTER BUILDER
+# MASTER BUILDER
 # ──────────────────────────────────────────────
 
 def add_microstructure_features(df: pd.DataFrame,
                                  use_bvc: bool = True) -> pd.DataFrame:
     """
-    Add all microstructure features to `df`.
-    Expected columns: open, high, low, close, volume
-
-    `use_bvc=False` skips scipy-dependent BVC (use if scipy unavailable).
+    Barcha microstructure featurelarni df ga qo'shadi.
+    Kutilgan ustunlar: open, high, low, close, volume
     """
     c, v = df["close"], df["volume"]
 
-    df["roll_spread"]            = roll_spread(c)
-    df["amihud_illiq"]           = amihud_illiquidity(c, v)
-    df["volume_delta"]           = volume_delta(c, v)
-    df["volume_delta_ratio_14"]  = volume_delta_ratio(c, v, 14)
-    df["effort_vs_result"]       = effort_vs_result(c, v)
-    df["obv_zscore"]             = on_balance_volume(c, v)
-    df["kyle_lambda"]            = kyle_lambda(c, v)
+    df["roll_spread"]           = roll_spread(c)
+    df["amihud_illiq"]          = amihud_illiquidity(c, v)
+    df["volume_delta_norm"]     = volume_delta_norm(c, v)
+    df["volume_delta_ratio_14"] = volume_delta_ratio(c, v, 14)
+    df["effort_vs_result"]      = effort_vs_result(c, v)
+    df["obv_zscore"]            = on_balance_volume(c, v)
+    df["kyle_lambda"]           = kyle_lambda(c, v)
 
     if use_bvc:
         try:
             bvc_df = bulk_volume_classification(c, v)
             df = pd.concat([df, bvc_df], axis=1)
         except ImportError:
-            # scipy not available — compute simplified delta only
-            df["bvc_delta"]     = volume_delta(c, v)
-            df["bvc_imbalance"] = volume_delta_ratio(c, v)
+            # scipy yo'q — oddiy imbalance bilan almashtiramiz
+            df["bvc_imbalance"]  = volume_delta_ratio(c, v)
+            df["bvc_delta_norm"] = volume_delta_norm(c, v)
 
     return df

@@ -1,23 +1,22 @@
 """
 time_features.py
 ================
-Temporal / calendar features for trading models.
+Temporal / calendar featurelar trading modeli uchun.
 
-Markets are NOT time-homogeneous:
-    • 08:00–11:00 UTC  — London open (high liquidity)
-    • 13:30–16:00 UTC  — NY open (overlap with London = peak volatility)
-    • 00:00–02:00 UTC  — Asian session (BTC market — OKX, Binance Asia)
-    • Monday open / Friday close — weekend gap risk
-    • End of month — institutional rebalancing
+Bozorlar vaqt bo'yicha bir xil emas:
+    00:00–08:00 UTC — Asian sessiya (BTC: OKX, Binance Asia)
+    07:00–16:00 UTC — London sessiya
+    13:00–17:00 UTC — London + NY overlap (eng yuqori volatilite)
+    13:30–21:00 UTC — NY sessiya
+    Dushanba ochilik / Juma yopilish — hafta sonu gap xavfi
+    Oy oxiri — institutional rebalancing
 
-A naive model trained on 24/7 BTC data will average over these regimes
-and learn nothing useful.  Time features allow the net to condition its
-predictions on the market "session" without hard-coding session logic.
+Barcha featurelar:
+    1. Siklik (sin/cos) — 23:00 va 01:00 o'rtasidagi masofa 2 soat,
+       22 soat emas.
+    2. Normalize qilingan [-1, +1].
 
-All features are:
-    1. Cyclical (sin/cos encoded) — so distance between 23:00 and 01:00
-       is correctly represented as 2 hours, not 22 hours.
-    2. Normalised to [-1, +1].
+Avvalgi versiyadan farq: o'zgarishsiz — yaxshi yozilgan edi.
 """
 
 import numpy as np
@@ -25,56 +24,49 @@ import pandas as pd
 
 
 # ──────────────────────────────────────────────
-# HELPERS
+# YORDAMCHI
 # ──────────────────────────────────────────────
 
 def _sin_cos(value: np.ndarray, period: float):
-    """Encode a cyclical variable using sin/cos."""
+    """Siklik o'zgaruvchini sin/cos orqali kodlash."""
     angle = 2 * np.pi * value / period
     return np.sin(angle), np.cos(angle)
 
 
 # ──────────────────────────────────────────────
-# 1. INTRADAY: HOUR OF DAY
+# 1. KUN SOATI
 # ──────────────────────────────────────────────
 
 def hour_features(index: pd.DatetimeIndex) -> pd.DataFrame:
     """
-    Sin/cos encoding of the hour of day (0–23).
+    Kun soatini (0-23) sin/cos kodlash.
 
-    Why cyclical encoding?
-        Hour 23 and hour 0 should be "close" in the feature space.
-        Linear encoding (23 vs 0) creates a spurious gap.
-
-    hour_sin, hour_cos together define a 2D point on the unit circle —
-    the neural net can learn any function of the hour with full continuity.
+    Nima uchun sin/cos?
+        23:00 va 00:00 "yaqin" bo'lishi kerak.
+        Linear (23 vs 0) — noto'g'ri farq. Sin/cos — to'g'ri.
     """
     hour = index.hour.astype(float)
     sin_h, cos_h = _sin_cos(hour, 24.0)
-
-    # Also expose raw hour as an integer for interpretability
     return pd.DataFrame({
         "hour_sin": sin_h,
         "hour_cos": cos_h,
-        "hour_raw": hour,         # 0–23, useful for attention heads
+        "hour_raw": hour,
     }, index=index)
 
 
 # ──────────────────────────────────────────────
-# 2. DAY OF WEEK
+# 2. HAFTA KUNI
 # ──────────────────────────────────────────────
 
 def dow_features(index: pd.DatetimeIndex) -> pd.DataFrame:
     """
-    Sin/cos encoding of day of week (Monday=0, Sunday=6).
+    Hafta kunini (0=Dush, 6=Yak) sin/cos kodlash.
 
-    Monday open: weekend gaps unwind — high uncertainty.
-    Friday close: position squaring before weekend — direction bias.
-    Wednesday: historically lower volatility mid-week.
+    Dushanba ochilik: hafta sonu gap unwind → yuqori noaniqlik.
+    Juma yopilish: pozitsiya yopish → yo'nalish bias.
     """
-    dow = index.dayofweek.astype(float)   # 0=Mon, 6=Sun
+    dow = index.dayofweek.astype(float)
     sin_d, cos_d = _sin_cos(dow, 7.0)
-
     return pd.DataFrame({
         "dow_sin": sin_d,
         "dow_cos": cos_d,
@@ -83,20 +75,15 @@ def dow_features(index: pd.DatetimeIndex) -> pd.DataFrame:
 
 
 # ──────────────────────────────────────────────
-# 3. DAY OF MONTH / MONTH OF YEAR
+# 3. OY KUNI va YIL OYI
 # ──────────────────────────────────────────────
 
 def calendar_features(index: pd.DatetimeIndex) -> pd.DataFrame:
     """
-    Sin/cos encoding of day-of-month and month-of-year.
+    Oy kuni (1-31) va yil oyi (1-12) sin/cos kodlash.
 
-    Day of month:
-        • End-of-month (27–31): institutional rebalancing, option expiry.
-        • Start-of-month (1–3): new capital deployment.
-
-    Month of year:
-        • Q1/Q4 tend to be higher volatility in crypto.
-        • "Sell in May" seasonality (crypto has its own version).
+    Oy oxiri (27-31): institutional rebalancing, option expiry.
+    Oy boshi (1-3): yangi kapital kiritish.
     """
     dom = index.day.astype(float)
     moy = index.month.astype(float)
@@ -113,86 +100,78 @@ def calendar_features(index: pd.DatetimeIndex) -> pd.DataFrame:
 
 
 # ──────────────────────────────────────────────
-# 4. TRADING SESSION FLAGS
+# 4. SESSIYA FLAGLARI
 # ──────────────────────────────────────────────
 
 def session_flags(index: pd.DatetimeIndex) -> pd.DataFrame:
     """
-    Binary flags for major trading sessions (UTC times).
+    Asosiy trading sessiyalar uchun binary flaglar (UTC).
 
-    Sessions defined (approximate, BTC-optimised):
-        Asian  session: 00:00–08:00 UTC
-        London session: 07:00–16:00 UTC
-        NY     session: 12:00–21:00 UTC
-        Overlap (London+NY): 13:00–17:00 UTC — peak volatility window
-
-    These can be used by the network to learn session-specific patterns
-    (e.g., large moves on NY open, quiet Asian consolidation).
+        Asian  sessiya: 00:00–08:00
+        London sessiya: 07:00–16:00
+        NY     sessiya: 13:30–21:00
+        Overlap       : 13:00–17:00  (eng yuqori volatilite)
+        Hafta sonu    : Shanba, Yakshanba
+        Dushanba ochilik: Dush 00:00–04:00
     """
     hour = index.hour
 
-    asian_session   = ((hour >= 0)  & (hour < 8)).astype(float)
-    london_session  = ((hour >= 7)  & (hour < 16)).astype(float)
-    ny_session      = ((hour >= 12) & (hour < 21)).astype(float)
-    overlap_session = ((hour >= 13) & (hour < 17)).astype(float)
-
-    # Weekend flag (Saturday=5, Sunday=6)
-    is_weekend = (index.dayofweek >= 5).astype(float)
-
-    # Monday open (first 4 hours of Monday)
-    is_monday_open = ((index.dayofweek == 0) & (hour < 4)).astype(float)
-
     return pd.DataFrame({
-        "session_asian":   asian_session,
-        "session_london":  london_session,
-        "session_ny":      ny_session,
-        "session_overlap": overlap_session,
-        "is_weekend":      is_weekend,
-        "is_monday_open":  is_monday_open,
+        "session_asian":   ((hour >= 0)  & (hour < 8)).astype(float),
+        "session_london":  ((hour >= 7)  & (hour < 16)).astype(float),
+        "session_ny":      ((hour >= 13) & (hour < 21)).astype(float),
+        "session_overlap": ((hour >= 13) & (hour < 17)).astype(float),
+        "is_weekend":      (index.dayofweek >= 5).astype(float),
+        "is_monday_open":  ((index.dayofweek == 0) & (hour < 4)).astype(float),
     }, index=index)
 
 
 # ──────────────────────────────────────────────
-# 5. BARS SINCE MIDNIGHT (intraday position)
+# 5. INTRADAY POZITSIYA
 # ──────────────────────────────────────────────
 
 def bars_since_midnight(index: pd.DatetimeIndex,
                          bar_minutes: int = 15) -> pd.Series:
     """
-    How many bars have elapsed since 00:00 UTC today?
+    00:00 UTC dan beri o'tgan barlar soni / kun boshidagi barlar soni.
+    Natija [0, 1] oralig'ida.
 
-    Provides a fine-grained intraday position signal.
-    Normalised to [0, 1] so scale is consistent with other features.
-
-    For M15: max = 96 bars per day → divide by 96.
+    M15 uchun: max 96 bar/kun → divide by 96.
+    H1  uchun: max 24 bar/kun → divide by 24.
+    H4  uchun: max 6  bar/kun → divide by 6.
     """
     minutes_elapsed = index.hour * 60 + index.minute
     bars_elapsed    = minutes_elapsed / bar_minutes
-    bars_per_day    = 1440 / bar_minutes   # 96 for M15
-    return pd.Series(bars_elapsed / bars_per_day,
-                     index=index, name="intraday_position")
+    bars_per_day    = 1440 / bar_minutes
+    return pd.Series(
+        bars_elapsed / bars_per_day,
+        index=index,
+        name="intraday_position"
+    )
 
 
 # ──────────────────────────────────────────────
-# 6. MASTER BUILDER
+# MASTER BUILDER
 # ──────────────────────────────────────────────
 
 def add_time_features(df: pd.DataFrame,
                       bar_minutes: int = 15) -> pd.DataFrame:
     """
-    Add all time features to `df`.
-    Requires df.index to be a DatetimeIndex (UTC).
+    Barcha vaqt featurelarni df ga qo'shadi.
+    df.index DatetimeIndex (UTC) bo'lishi shart.
     """
     if not isinstance(df.index, pd.DatetimeIndex):
-        raise TypeError("DataFrame index must be a DatetimeIndex for time features.")
+        raise TypeError("df.index DatetimeIndex bo'lishi kerak (UTC).")
 
     idx = df.index
 
-    df = pd.concat([df,
-                    hour_features(idx),
-                    dow_features(idx),
-                    calendar_features(idx),
-                    session_flags(idx)], axis=1)
+    df = pd.concat([
+        df,
+        hour_features(idx),
+        dow_features(idx),
+        calendar_features(idx),
+        session_flags(idx),
+    ], axis=1)
 
     df["intraday_position"] = bars_since_midnight(idx, bar_minutes)
 
