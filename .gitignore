@@ -1,0 +1,12 @@
+# Katta fayllar
+data/*.csv
+data/*.parquet
+models/*.pkl
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Logs
+*.log
