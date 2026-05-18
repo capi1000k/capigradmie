@@ -1,0 +1,840 @@
+2026-05-18 14:48:35,610 [dash] INFO  [dash] starting at http://127.0.0.1:8050
+2026-05-18 14:48:35,611 [dash.dash] INFO  Dash is running on http://127.0.0.1:8050/
+
+2026-05-18 14:50:26,276 [dash] INFO  [dash] starting at http://127.0.0.1:8050
+2026-05-18 14:50:26,277 [dash.dash] INFO  Dash is running on http://127.0.0.1:8050/
+
+2026-05-18 14:53:58,240 [dash] INFO  [dash] starting at http://127.0.0.1:8050
+2026-05-18 14:53:58,241 [dash.dash] INFO  Dash is running on http://127.0.0.1:8050/
+
+2026-05-18 14:54:21,759 [dash] INFO  [dash] starting at http://127.0.0.1:8050
+2026-05-18 14:54:21,759 [dash.dash] INFO  Dash is running on http://127.0.0.1:8050/
+
+2026-05-18 14:56:11,712 [dash] INFO  [dash] starting at http://127.0.0.1:8050
+2026-05-18 14:56:11,712 [dash.dash] INFO  Dash is running on http://127.0.0.1:8050/
+
+2026-05-18 14:57:44,903 [dash] INFO  [dash] starting at http://127.0.0.1:8050
+2026-05-18 14:57:44,904 [dash.dash] INFO  Dash is running on http://127.0.0.1:8050/
+
+2026-05-18 15:00:20,426 [dash] INFO  [dash] starting at http://127.0.0.1:8050
+2026-05-18 15:00:20,426 [dash.dash] INFO  Dash is running on http://127.0.0.1:8050/
+
+2026-05-18 15:06:12,985 [dash] INFO  [dash] starting at http://127.0.0.1:8050
+2026-05-18 15:06:12,985 [dash.dash] INFO  Dash is running on http://127.0.0.1:8050/
+
+2026-05-18 15:14:16,616 [dash] INFO  [dash] starting at http://127.0.0.1:8050
+2026-05-18 15:14:16,617 [dash.dash] INFO  Dash is running on http://127.0.0.1:8050/
+
+2026-05-18 15:14:31,852 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:14:33,830 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:14:35,845 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:14:37,827 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:14:39,833 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:14:41,813 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:14:43,825 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:14:47,206 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:14:49,210 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:14:51,214 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:14:53,201 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:14:53,855 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:14:55,807 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:14:57,809 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:14:59,817 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:01,813 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:03,812 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:05,817 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:07,824 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:09,829 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:11,813 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:13,826 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:15,814 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:17,822 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:21,213 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:23,215 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:25,211 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:27,200 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:29,207 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:31,212 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:33,205 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:35,209 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:37,225 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:37,830 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:39,814 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:41,812 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:43,818 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:45,817 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:47,812 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:49,813 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:51,838 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:53,837 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:55,218 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:55,665 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:55,816 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:15:59,242 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:01,210 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:03,214 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:05,227 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:07,209 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:09,209 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:11,209 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:13,257 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:15,218 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:17,212 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:19,204 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:19,829 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:21,814 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:23,825 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:25,818 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:27,817 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:29,820 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:31,817 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:33,855 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:35,830 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:37,822 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:41,216 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:43,213 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:45,223 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:47,208 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:48,679 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:49,819 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:51,814 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:53,811 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:57,219 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:16:59,208 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:01,213 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:03,202 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:05,210 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:07,211 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:09,212 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:11,210 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:13,209 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:15,211 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:17,210 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:19,212 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:21,214 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:23,212 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:25,210 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:27,212 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:29,210 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:31,195 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:33,209 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:35,210 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:37,211 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:39,212 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:41,210 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:43,209 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:45,250 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:47,209 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:49,211 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:51,113 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:51,834 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:53,824 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:55,240 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:55,538 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:57,211 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:17:59,232 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:01,217 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:03,211 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:05,209 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:07,209 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:09,214 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:11,208 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:13,212 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:15,244 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:17,206 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:19,215 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:21,219 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:23,207 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:25,205 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:27,214 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:29,210 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:31,213 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:33,213 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:35,217 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:37,213 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:39,211 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:41,200 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:43,219 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:45,214 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:47,210 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:49,248 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:51,210 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:18:53,210 [dash] ERROR  [dash] chart_imbalance error:
+Traceback (most recent call last):
+  File "/opt/goinfre/zanerhon/capigradmie/market_observatory/src/dash_dashboard.py", line 357, in chart_imbalance
+    fig.update_layout(
+TypeError: plotly.graph_objs._figure.Figure.update_layout() got multiple values for keyword argument 'yaxis'
+
+2026-05-18 15:19:20,609 [dash] INFO  [dash] starting at http://127.0.0.1:8050
+2026-05-18 15:19:20,609 [dash.dash] INFO  Dash is running on http://127.0.0.1:8050/
+

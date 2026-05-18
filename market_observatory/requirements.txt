@@ -1,0 +1,22 @@
+# Data
+aiohttp>=3.9.0
+websockets>=12.0
+pandas>=2.0.0
+numpy>=1.26.0
+pyarrow>=14.0.0
+
+# Storage
+duckdb>=0.10.0
+
+# Dashboard
+plotly>=5.18.0
+dash>=2.16.0
+dash-bootstrap-components>=1.5.0
+
+# Utils
+python-dateutil>=2.8.2
+colorlog>=6.8.0
+
+# Optional: faster matplotlib preview
+matplotlib>=3.8.0
+requests>=2.31.0

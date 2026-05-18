@@ -1,0 +1,20 @@
+2026-05-18 14:48:31,791 [websocket] INFO  [trades] connecting → wss://stream.binance.com:9443/ws/btcusdt@aggTrade
+2026-05-18 14:48:32,595 [websocket] INFO  [trades] ✓ connected
+2026-05-18 14:50:23,038 [websocket] INFO  [trades] connecting → wss://stream.binance.com:9443/ws/btcusdt@aggTrade
+2026-05-18 14:50:23,883 [websocket] INFO  [trades] ✓ connected
+2026-05-18 14:53:55,062 [websocket] INFO  [trades] connecting → wss://stream.binance.com:9443/ws/btcusdt@aggTrade
+2026-05-18 14:53:55,844 [websocket] INFO  [trades] ✓ connected
+2026-05-18 14:54:18,567 [websocket] INFO  [trades] connecting → wss://stream.binance.com:9443/ws/btcusdt@aggTrade
+2026-05-18 14:54:19,261 [websocket] INFO  [trades] ✓ connected
+2026-05-18 14:56:08,463 [websocket] INFO  [trades] connecting → wss://stream.binance.com:9443/ws/btcusdt@aggTrade
+2026-05-18 14:56:09,981 [websocket] INFO  [trades] ✓ connected
+2026-05-18 14:57:41,709 [websocket] INFO  [trades] connecting → wss://stream.binance.com:9443/ws/btcusdt@aggTrade
+2026-05-18 14:57:42,514 [websocket] INFO  [trades] ✓ connected
+2026-05-18 15:00:17,180 [websocket] INFO  [trades] connecting → wss://stream.binance.com:9443/ws/btcusdt@aggTrade
+2026-05-18 15:00:17,737 [websocket] INFO  [trades] ✓ connected
+2026-05-18 15:06:09,756 [websocket] INFO  [trades] connecting → wss://stream.binance.com:9443/ws/btcusdt@aggTrade
+2026-05-18 15:06:10,487 [websocket] INFO  [trades] ✓ connected
+2026-05-18 15:14:13,329 [websocket] INFO  [trades] connecting → wss://stream.binance.com:9443/ws/btcusdt@aggTrade
+2026-05-18 15:14:14,060 [websocket] INFO  [trades] ✓ connected
+2026-05-18 15:19:17,334 [websocket] INFO  [trades] connecting → wss://stream.binance.com:9443/ws/btcusdt@aggTrade
+2026-05-18 15:19:18,103 [websocket] INFO  [trades] ✓ connected

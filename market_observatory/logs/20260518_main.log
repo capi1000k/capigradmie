@@ -1,0 +1,88 @@
+2026-05-18 14:48:31,789 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 14:48:31,789 [main] INFO    MARKET BEHAVIOR OBSERVATORY  v2.0
+2026-05-18 14:48:31,789 [main] INFO    Symbol: BTCUSDT  │  Backend: DuckDB  │  UI: Plotly Dash
+2026-05-18 14:48:31,789 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 14:48:31,789 [main] INFO  Mode: FULL  (data + Dash dashboard)
+2026-05-18 14:48:31,789 [main] INFO  Waiting 3s for initial data…
+2026-05-18 14:48:31,789 [main] INFO  ▶  Starting data ingestion layer
+2026-05-18 14:48:35,610 [main] INFO  Open your browser → http://127.0.0.1:8050
+2026-05-18 14:50:14,428 [main] INFO  Shutting down
+2026-05-18 14:50:23,036 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 14:50:23,036 [main] INFO    MARKET BEHAVIOR OBSERVATORY  v2.0
+2026-05-18 14:50:23,036 [main] INFO    Symbol: BTCUSDT  │  Backend: DuckDB  │  UI: Plotly Dash
+2026-05-18 14:50:23,036 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 14:50:23,036 [main] INFO  Mode: FULL  (data + Dash dashboard)
+2026-05-18 14:50:23,036 [main] INFO  Waiting 3s for initial data…
+2026-05-18 14:50:23,036 [main] INFO  ▶  Starting data ingestion layer
+2026-05-18 14:50:26,276 [main] INFO  Open your browser → http://127.0.0.1:8050
+2026-05-18 14:53:55,060 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 14:53:55,060 [main] INFO    MARKET BEHAVIOR OBSERVATORY  v2.0
+2026-05-18 14:53:55,060 [main] INFO    Symbol: BTCUSDT  │  Backend: DuckDB  │  UI: Plotly Dash
+2026-05-18 14:53:55,060 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 14:53:55,060 [main] INFO  Mode: FULL  (data + Dash dashboard)
+2026-05-18 14:53:55,060 [main] INFO  Waiting 3s for initial data…
+2026-05-18 14:53:55,061 [main] INFO  ▶  Starting data ingestion layer
+2026-05-18 14:53:58,240 [main] INFO  Open your browser → http://127.0.0.1:8050
+2026-05-18 14:54:18,564 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 14:54:18,564 [main] INFO    MARKET BEHAVIOR OBSERVATORY  v2.0
+2026-05-18 14:54:18,564 [main] INFO    Symbol: BTCUSDT  │  Backend: DuckDB  │  UI: Plotly Dash
+2026-05-18 14:54:18,565 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 14:54:18,565 [main] INFO  Mode: FULL  (data + Dash dashboard)
+2026-05-18 14:54:18,565 [main] INFO  Waiting 3s for initial data…
+2026-05-18 14:54:18,565 [main] INFO  ▶  Starting data ingestion layer
+2026-05-18 14:54:21,759 [main] INFO  Open your browser → http://127.0.0.1:8050
+2026-05-18 14:55:29,568 [main] INFO  Shutting down
+2026-05-18 14:56:08,461 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 14:56:08,461 [main] INFO    MARKET BEHAVIOR OBSERVATORY  v2.0
+2026-05-18 14:56:08,461 [main] INFO    Symbol: BTCUSDT  │  Backend: DuckDB  │  UI: Plotly Dash
+2026-05-18 14:56:08,461 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 14:56:08,461 [main] INFO  Mode: FULL  (data + Dash dashboard)
+2026-05-18 14:56:08,461 [main] INFO  Waiting 3s for initial data…
+2026-05-18 14:56:08,461 [main] INFO  ▶  Starting data ingestion layer
+2026-05-18 14:56:11,712 [main] INFO  Open your browser → http://127.0.0.1:8050
+2026-05-18 14:57:38,162 [main] INFO  Shutting down
+2026-05-18 14:57:41,707 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 14:57:41,707 [main] INFO    MARKET BEHAVIOR OBSERVATORY  v2.0
+2026-05-18 14:57:41,707 [main] INFO    Symbol: BTCUSDT  │  Backend: DuckDB  │  UI: Plotly Dash
+2026-05-18 14:57:41,707 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 14:57:41,707 [main] INFO  Mode: FULL  (data + Dash dashboard)
+2026-05-18 14:57:41,707 [main] INFO  Waiting 3s for initial data…
+2026-05-18 14:57:41,707 [main] INFO  ▶  Starting data ingestion layer
+2026-05-18 14:57:44,903 [main] INFO  Open your browser → http://127.0.0.1:8050
+2026-05-18 14:58:55,619 [main] INFO  Shutting down
+2026-05-18 15:00:17,177 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 15:00:17,177 [main] INFO    MARKET BEHAVIOR OBSERVATORY  v2.0
+2026-05-18 15:00:17,177 [main] INFO    Symbol: BTCUSDT  │  Backend: DuckDB  │  UI: Plotly Dash
+2026-05-18 15:00:17,177 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 15:00:17,177 [main] INFO  Mode: FULL  (data + Dash dashboard)
+2026-05-18 15:00:17,177 [main] INFO  Waiting 3s for initial data…
+2026-05-18 15:00:17,178 [main] INFO  ▶  Starting data ingestion layer
+2026-05-18 15:00:20,426 [main] INFO  Open your browser → http://127.0.0.1:8050
+2026-05-18 15:02:01,504 [main] INFO  Shutting down
+2026-05-18 15:06:09,753 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 15:06:09,753 [main] INFO    MARKET BEHAVIOR OBSERVATORY  v2.0
+2026-05-18 15:06:09,753 [main] INFO    Symbol: BTCUSDT  │  Backend: DuckDB  │  UI: Plotly Dash
+2026-05-18 15:06:09,753 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 15:06:09,753 [main] INFO  Mode: FULL  (data + Dash dashboard)
+2026-05-18 15:06:09,754 [main] INFO  Waiting 3s for initial data…
+2026-05-18 15:06:09,754 [main] INFO  ▶  Starting data ingestion layer
+2026-05-18 15:06:12,985 [main] INFO  Open your browser → http://127.0.0.1:8050
+2026-05-18 15:13:58,542 [main] INFO  Shutting down
+2026-05-18 15:14:13,326 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 15:14:13,326 [main] INFO    MARKET BEHAVIOR OBSERVATORY  v2.0
+2026-05-18 15:14:13,327 [main] INFO    Symbol: BTCUSDT  │  Backend: DuckDB  │  UI: Plotly Dash
+2026-05-18 15:14:13,327 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 15:14:13,327 [main] INFO  Mode: FULL  (data + Dash dashboard)
+2026-05-18 15:14:13,327 [main] INFO  Waiting 3s for initial data…
+2026-05-18 15:14:13,327 [main] INFO  ▶  Starting data ingestion layer
+2026-05-18 15:14:16,616 [main] INFO  Open your browser → http://127.0.0.1:8050
+2026-05-18 15:19:10,682 [main] INFO  Shutting down
+2026-05-18 15:19:17,331 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 15:19:17,332 [main] INFO    MARKET BEHAVIOR OBSERVATORY  v2.0
+2026-05-18 15:19:17,332 [main] INFO    Symbol: BTCUSDT  │  Backend: DuckDB  │  UI: Plotly Dash
+2026-05-18 15:19:17,332 [main] INFO  ════════════════════════════════════════════════════════════
+2026-05-18 15:19:17,332 [main] INFO  Mode: FULL  (data + Dash dashboard)
+2026-05-18 15:19:17,332 [main] INFO  Waiting 3s for initial data…
+2026-05-18 15:19:17,332 [main] INFO  ▶  Starting data ingestion layer
+2026-05-18 15:19:20,609 [main] INFO  Open your browser → http://127.0.0.1:8050
+2026-05-18 15:28:25,429 [main] INFO  Shutting down

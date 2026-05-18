@@ -1,0 +1,40 @@
+2026-05-18 14:48:31,801 [orderbook] INFO  [orderbook] connecting → wss://stream.binance.com:9443/ws/btcusdt@depth@100ms
+2026-05-18 14:48:32,594 [orderbook] INFO  [orderbook] fetching depth snapshot…
+2026-05-18 14:48:33,053 [orderbook] INFO  [orderbook] snapshot ok, lastUpdateId=93875503447
+2026-05-18 14:48:33,053 [orderbook] INFO  [orderbook] ✓ synced, processing events
+2026-05-18 14:50:23,051 [orderbook] INFO  [orderbook] connecting → wss://stream.binance.com:9443/ws/btcusdt@depth@100ms
+2026-05-18 14:50:23,857 [orderbook] INFO  [orderbook] fetching depth snapshot…
+2026-05-18 14:50:25,340 [orderbook] INFO  [orderbook] snapshot ok, lastUpdateId=93875555248
+2026-05-18 14:50:25,340 [orderbook] INFO  [orderbook] ✓ synced, processing events
+2026-05-18 14:53:55,074 [orderbook] INFO  [orderbook] connecting → wss://stream.binance.com:9443/ws/btcusdt@depth@100ms
+2026-05-18 14:53:55,865 [orderbook] INFO  [orderbook] fetching depth snapshot…
+2026-05-18 14:53:56,334 [orderbook] INFO  [orderbook] snapshot ok, lastUpdateId=93875653905
+2026-05-18 14:53:56,334 [orderbook] INFO  [orderbook] ✓ synced, processing events
+2026-05-18 14:54:18,578 [orderbook] INFO  [orderbook] connecting → wss://stream.binance.com:9443/ws/btcusdt@depth@100ms
+2026-05-18 14:54:19,261 [orderbook] INFO  [orderbook] fetching depth snapshot…
+2026-05-18 14:54:19,723 [orderbook] INFO  [orderbook] snapshot ok, lastUpdateId=93875666692
+2026-05-18 14:54:19,724 [orderbook] INFO  [orderbook] ✓ synced, processing events
+2026-05-18 14:56:08,474 [orderbook] INFO  [orderbook] connecting → wss://stream.binance.com:9443/ws/btcusdt@depth@100ms
+2026-05-18 14:56:09,217 [orderbook] INFO  [orderbook] fetching depth snapshot…
+2026-05-18 14:56:11,570 [orderbook] INFO  [orderbook] snapshot ok, lastUpdateId=93875710927
+2026-05-18 14:56:11,570 [orderbook] INFO  [orderbook] ✓ synced, processing events
+2026-05-18 14:57:41,722 [orderbook] INFO  [orderbook] connecting → wss://stream.binance.com:9443/ws/btcusdt@depth@100ms
+2026-05-18 14:57:42,540 [orderbook] INFO  [orderbook] fetching depth snapshot…
+2026-05-18 14:57:43,019 [orderbook] INFO  [orderbook] snapshot ok, lastUpdateId=93875737147
+2026-05-18 14:57:43,019 [orderbook] INFO  [orderbook] ✓ synced, processing events
+2026-05-18 15:00:17,193 [orderbook] INFO  [orderbook] connecting → wss://stream.binance.com:9443/ws/btcusdt@depth@100ms
+2026-05-18 15:00:18,767 [orderbook] INFO  [orderbook] fetching depth snapshot…
+2026-05-18 15:00:20,296 [orderbook] INFO  [orderbook] snapshot ok, lastUpdateId=93875793164
+2026-05-18 15:00:20,296 [orderbook] INFO  [orderbook] ✓ synced, processing events
+2026-05-18 15:06:09,765 [orderbook] INFO  [orderbook] connecting → wss://stream.binance.com:9443/ws/btcusdt@depth@100ms
+2026-05-18 15:06:10,508 [orderbook] INFO  [orderbook] fetching depth snapshot…
+2026-05-18 15:06:10,975 [orderbook] INFO  [orderbook] snapshot ok, lastUpdateId=93876008781
+2026-05-18 15:06:10,975 [orderbook] INFO  [orderbook] ✓ synced, processing events
+2026-05-18 15:14:13,344 [orderbook] INFO  [orderbook] connecting → wss://stream.binance.com:9443/ws/btcusdt@depth@100ms
+2026-05-18 15:14:14,074 [orderbook] INFO  [orderbook] fetching depth snapshot…
+2026-05-18 15:14:14,534 [orderbook] INFO  [orderbook] snapshot ok, lastUpdateId=93876297820
+2026-05-18 15:14:14,534 [orderbook] INFO  [orderbook] ✓ synced, processing events
+2026-05-18 15:19:17,346 [orderbook] INFO  [orderbook] connecting → wss://stream.binance.com:9443/ws/btcusdt@depth@100ms
+2026-05-18 15:19:18,038 [orderbook] INFO  [orderbook] fetching depth snapshot…
+2026-05-18 15:19:18,522 [orderbook] INFO  [orderbook] snapshot ok, lastUpdateId=93876432362
+2026-05-18 15:19:18,522 [orderbook] INFO  [orderbook] ✓ synced, processing events
