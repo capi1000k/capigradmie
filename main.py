@@ -14,6 +14,7 @@ import argparse
 import sys
 import signal
 import threading
+import time
 from collections import deque
 
 from src.config import KLINE_POLL_M1, KLINE_POLL_M5
@@ -21,7 +22,7 @@ from src.ingestion_klines import poll_klines
 from src.regime import RegimeEngine
 from src.ingestion_ws import stream_trades, stream_orderbook
 from src.logger import get_logger
-
+from src.events import detector
 
 
 log = get_logger("main")
@@ -41,13 +42,11 @@ shared_state: dict = {
 async def run_data_layer() -> None:
     log.info("▶  Starting data ingestion layer")
 
-
     tasks = [
         asyncio.create_task(poll_klines("1m", KLINE_POLL_M1, shared_state), name="klines_m1"),
         asyncio.create_task(poll_klines("5m", KLINE_POLL_M5, shared_state), name="klines_m5"),
-        asyncio.create_task(stream_trades(shared_state),                      name="trades_ws"),
-        asyncio.create_task(stream_orderbook(shared_state),                   name="orderbook_ws"),
-        asyncio.create_task(_regime_loop(),                                    name="regime"),
+        asyncio.create_task(stream_trades(shared_state),                     name="trades_ws"),
+        asyncio.create_task(stream_orderbook(shared_state),                  name="orderbook_ws"),
     ]
     try:
         await asyncio.gather(*tasks)
@@ -56,37 +55,18 @@ async def run_data_layer() -> None:
             t.cancel()
         await asyncio.gather(*tasks, return_exceptions=True)
 
-def try_log_absorption(regime_data, shared_state):
-    if not regime_data:
-        return
 
-    signals = regime_data.get("signals")
-    if not signals:
-        return
+def _regime_thread_fn() -> None:
+    """Regime engine + event detector — har 500ms da ishga tushadi."""
+    while True:
+        try:
+            _regime_engine.compute(shared_state)
+            detector.update(shared_state)
+        except Exception as e:
+            log.error(f"Regime thread error: {e}")
+        time.sleep(0.5)
 
-    price_data = shared_state.get("klines_m1") or {}
-    price = price_data.get("close", 0.0)
 
-    base_payload = dict(
-        bar_index=shared_state.get("bar_index", 0),
-        regime_label=regime_data.get("label", "UNKNOWN"),
-        regime_confidence=regime_data.get("confidence", 0.0),
-        slope_z=signals.get("slope_z", 0.0),
-        ofi_z=signals.get("ofi_z", 0.0),
-        imbalance=signals.get("imbalance", 0.0),
-        spread_z=signals.get("spread_bps_z", 0.0),
-        price=price
-    )
-
-    # 🔥 ABSORPTION BUY
-    if signals.get("absorption_buy", False):
-        event_store.log(event_type=EventType.ABSORPTION_BUY, **base_payload)
-
-    # 🔥 ABSORPTION SELL
-    elif signals.get("absorption_sell", False):
-        event_store.log(event_type=EventType.ABSORPTION_SELL, **base_payload)
-
-        
 def start_data_in_thread() -> threading.Thread:
     def _run():
         loop = asyncio.new_event_loop()
@@ -100,6 +80,10 @@ def start_data_in_thread() -> threading.Thread:
 
     t = threading.Thread(target=_run, name="data-layer", daemon=True)
     t.start()
+
+    t_regime = threading.Thread(target=_regime_thread_fn, name="regime", daemon=True)
+    t_regime.start()
+
     return t
 
 
@@ -143,7 +127,6 @@ def main():
     log.info("Mode: FULL  (data + Dash dashboard)")
     start_data_in_thread()
 
-    import time
     log.info("Waiting 3s for initial data…")
     time.sleep(3)
 
