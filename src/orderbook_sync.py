@@ -271,7 +271,7 @@ class OrderBookSyncer:
                                 self.shared_state["orderbook_live"] = snap
                                 self.wal.append(snap)
                                 self._latency.update(snap["latency_ms"])
-                                self.shared_state["latencytats()  # ← YANGI_stats"] = self._latency
+                                self.shared_state["latency_stats"] = self._latency.stats()
                                 self._dq.record_ob_update(spread=snap.get("spread", 0))
                                 self._dq.snapshot(self.shared_state)
 

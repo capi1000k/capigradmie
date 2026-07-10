@@ -19,7 +19,7 @@ DB_PATH        = DATA_DIR / "observatory.duckdb"   # ← NEW: DuckDB file
 for d in [KLINES_M1_DIR, KLINES_M5_DIR, TRADES_DIR, ORDERBOOK_DIR, LOG_DIR]:
     d.mkdir(parents=True, exist_ok=True)
 
-# ─── BINANCE ──────────────────────────────────────────────────────────────────
+# ─── BINANCE (SPOT) ───────────────────────────────────────────────────────────
 BINANCE_REST_BASE  = "https://api.binance.com"
 BINANCE_WS_BASE    = "wss://stream.binance.com:9443/ws"
 
@@ -28,6 +28,15 @@ SYMBOL_LOWER       = SYMBOL.lower()
 
 KLINE_ENDPOINT     = f"{BINANCE_REST_BASE}/api/v3/klines"
 DEPTH_SNAPSHOT_URL = f"{BINANCE_REST_BASE}/api/v3/depth"
+
+# ─── BINANCE (USDT-M FUTURES) ─────────────────────────────────────────────────
+# Liquidations, Open Interest va Funding/Mark Price faqat Futures'da mavjud —
+# spot orderbook/trade bilan bir xil SYMBOL, alohida base URL.
+FUTURES_REST_BASE      = "https://fapi.binance.com"
+FUTURES_WS_BASE        = "wss://fstream.binance.com/ws"
+
+OPEN_INTEREST_ENDPOINT = f"{FUTURES_REST_BASE}/fapi/v1/openInterest"
+OPEN_INTEREST_POLL     = 10   # seconds — REST poll (OI kam o'zgaradi, WS shart emas)
 
 # ─── INTERVALS ────────────────────────────────────────────────────────────────
 KLINE_POLL_M1      = 60          # seconds

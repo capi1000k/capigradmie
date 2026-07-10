@@ -20,7 +20,10 @@ from collections import deque
 from src.config import KLINE_POLL_M1, KLINE_POLL_M5
 from src.ingestion_klines import poll_klines
 from src.regime import RegimeEngine
-from src.ingestion_ws import stream_trades, stream_orderbook
+from src.ingestion_ws import (
+    stream_trades, stream_orderbook,
+    stream_liquidations, stream_mark_price, poll_open_interest,
+)
 from src.logger import get_logger
 from src.events import detector
 
@@ -29,13 +32,16 @@ log = get_logger("main")
 _regime_engine = RegimeEngine()
 
 shared_state: dict = {
-    "klines_m1":      None,
-    "klines_m5":      None,
-    "trades_live":    deque(maxlen=500),
-    "orderbook_live": None,
-    "cvd_live":       None,
-    "regime":         None,
-    "bar_index":      0,
+    "klines_m1":          None,
+    "klines_m5":          None,
+    "trades_live":        deque(maxlen=500),
+    "orderbook_live":     None,
+    "cvd_live":           None,
+    "regime":             None,
+    "bar_index":          0,
+    "liquidations_live":  deque(maxlen=200),
+    "mark_price_live":    None,
+    "open_interest_live": None,
 }
 
 
@@ -47,6 +53,9 @@ async def run_data_layer() -> None:
         asyncio.create_task(poll_klines("5m", KLINE_POLL_M5, shared_state), name="klines_m5"),
         asyncio.create_task(stream_trades(shared_state),                     name="trades_ws"),
         asyncio.create_task(stream_orderbook(shared_state),                  name="orderbook_ws"),
+        asyncio.create_task(stream_liquidations(shared_state),               name="liquidations_ws"),
+        asyncio.create_task(stream_mark_price(shared_state),                 name="mark_price_ws"),
+        asyncio.create_task(poll_open_interest(shared_state),                name="open_interest_poll"),
     ]
     try:
         await asyncio.gather(*tasks)
