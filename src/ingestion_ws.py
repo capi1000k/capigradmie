@@ -1,7 +1,12 @@
 # src/ingestion_ws.py
 """
-DATA INGESTION — WEBSOCKET STREAMS v3
+DATA INGESTION — WEBSOCKET STREAMS v4
 ──────────────────────────────────────
+v3 dan farqi:
+  0. Trade stream @aggTrade → @trade ga o'zgartirildi — endi HAR BIR
+     alohida execution (chin tick-by-tick) keladi, agregatlangan emas.
+     trade_id maydoni ham "a" (aggTrade id) o'rniga "t" (trade id).
+
 v2 dan farqi:
   1. CVD restart-persistence — DB'dagi oxirgi CVD'dan davom etadi
      (avval har restart CVD'ni 0'ga tushirib signalni buzardi).
@@ -19,7 +24,6 @@ v2 dan farqi:
 import asyncio
 import json
 from collections import deque
-
 import pandas as pd  # shared_state va WALBuffer uchun hali kerak
 
 from src.config import (
@@ -36,6 +40,7 @@ from src.db import (
     insert_liquidations, insert_open_interest, insert_mark_price,
     load_last_cvd,
 )
+from src import db
 from src.orderbook_sync import OrderBookSyncer
 from src.logger import get_logger
 
@@ -78,7 +83,7 @@ class CVDTracker:
 
 async def stream_trades(shared_state: dict) -> None:
     import websockets
-    url     = f"{BINANCE_WS_BASE}/{SYMBOL_LOWER}@aggTrade"
+    url     = f"{BINANCE_WS_BASE}/{SYMBOL_LOWER}@trade"
     wal     = WALBuffer("trades", insert_trades)
     cvd     = CVDTracker()
     lat_mon = LatencyMonitor("trades")
@@ -100,7 +105,7 @@ async def stream_trades(shared_state: dict) -> None:
                         qty  = float(msg["q"])
                         is_bm = bool(msg["m"])
                         exchange_ts = to_timestamp(int(msg["T"]))
-                        trade_id = int(msg["a"])
+                        trade_id = int(msg["t"])
                         price = float(msg["p"])
                     except _PARSE_ERRORS as e:
                         log.error(f"[trades] malformed message, skipping: {e} | raw={raw[:200]}")
@@ -302,7 +307,7 @@ async def poll_open_interest(shared_state: dict) -> None:
                     "open_interest": oi,
                     "oi_value":      oi_value,
                 }
-                insert_open_interest(pd.DataFrame([row]))
+                db.enqueue_write("open_interest", insert_open_interest, pd.DataFrame([row]))
                 shared_state["open_interest_live"] = row
 
             except asyncio.CancelledError:

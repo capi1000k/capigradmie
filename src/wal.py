@@ -1,14 +1,22 @@
 # src/wal.py
 """
-WAL — Write-Ahead Log Buffer
-──────────────────────────────
-Crash-safe flush strategy:
-  - Accumulate rows in memory
-  - Flush to DuckDB every WAL_FLUSH_SECONDS OR WAL_FLUSH_ROWS
-  - On crash: at most WAL_FLUSH_ROWS * WAL_FLUSH_SECONDS rows lost
-    (default: 100 rows or 1 second — minimal loss)
+WAL — Write-Ahead Log Buffer  (v2 — non-blocking flush)
+──────────────────────────────────────────────────────
+v1 muammosi:
+  append() threshold to'lganda _flush() ni event loop thread'ining
+  O'ZIDA sinxron chaqirar edi → DuckDB I/O event loop'ni bloklardi.
+  Bir nechta jadval (trades/orderbook/cvd/liquidations/mark_price)
+  bir vaqtda flush qilishga uringanda DuckDB lock kutish natijasida
+  BUTUN asyncio event loop bir necha yuz ms ga muzlab qolardi —
+  socket'da xabarlar to'planib, keyin birdan "burst" bo'lib kelardi
+  (soxta latency spike, real tarmoq kechikishi emas).
 
-This replaces the old "buffer 500 trades → flush" pattern.
+v2 yechimi:
+  _flush() endi faqat xotiradagi buferni nusxalab tozalaydi (tez,
+  I/O yo'q) va DataFrame'ni umumiy yagona writer-thread navbatiga
+  (src.db.enqueue_write) topshiradi. Haqiqiy DuckDB yozuvi faqat
+  o'sha bitta background thread'da sodir bo'ladi — hech qachon
+  event loop yoki boshqa thread bloklanmaydi.
 """
 
 import time
@@ -19,6 +27,7 @@ import pandas as pd
 
 from src.config import WAL_FLUSH_SECONDS, WAL_FLUSH_ROWS
 from src.logger import get_logger
+from src import db
 
 log = get_logger("wal")
 
@@ -29,27 +38,33 @@ class WALBuffer:
 
     Usage:
         wal = WALBuffer("trades", db.insert_trades)
-        wal.append(row_dict)       # from websocket
-        wal.start_flush_thread()   # background auto-flush
+        wal.append(row_dict)       # from websocket — never blocks on DB I/O
+        wal.start_flush_thread()   # background timer-based flush
     """
 
     def __init__(self, name: str, flush_fn: Callable[[pd.DataFrame], int]):
-        self.name      = name
-        self.flush_fn  = flush_fn
+        self.name         = name
+        self.flush_fn     = flush_fn
         self._buf: list[dict] = []
-        self._lock     = threading.Lock()
-        self._last_flush = time.monotonic()
+        self._lock        = threading.Lock()
+        self._last_flush  = time.monotonic()
         self._thread: threading.Thread | None = None
-        self._running  = False
+        self._running     = False
 
     def append(self, row: dict) -> None:
+        """Called from websocket handlers (event loop thread). Must stay
+        non-blocking — only in-memory list append + occasional buffer
+        copy/clear, never direct DB I/O."""
         with self._lock:
             self._buf.append(row)
-        # immediate flush if row threshold hit
-        if len(self._buf) >= WAL_FLUSH_ROWS:
+            hit_threshold = len(self._buf) >= WAL_FLUSH_ROWS
+        if hit_threshold:
             self._flush()
 
     def _flush(self) -> None:
+        """Copy + clear the in-memory buffer (fast, lock-only) and hand the
+        DataFrame off to the single shared writer thread. No DuckDB I/O
+        happens here, so this never blocks the caller (event loop safe)."""
         with self._lock:
             if not self._buf:
                 return
@@ -58,9 +73,7 @@ class WALBuffer:
             self._last_flush = time.monotonic()
 
         df = pd.DataFrame(batch)
-        n  = self.flush_fn(df)
-        if n:
-            log.debug(f"[wal/{self.name}] flushed {n} rows")
+        db.enqueue_write(self.name, self.flush_fn, df)
 
     def _flush_loop(self) -> None:
         while self._running:
@@ -78,9 +91,11 @@ class WALBuffer:
         )
         self._thread.start()
         log.info(f"[wal/{self.name}] flush thread started "
-                 f"(every {WAL_FLUSH_SECONDS}s or {WAL_FLUSH_ROWS} rows)")
+                 f"(every {WAL_FLUSH_SECONDS}s or {WAL_FLUSH_ROWS} rows, "
+                 f"async writer queue)")
 
     def stop(self) -> None:
         self._running = False
-        self._flush()   # final flush on shutdown
-        log.info(f"[wal/{self.name}] stopped, final flush done")
+        self._flush()                       # final buffer → queue
+        db.wait_for_writer_drain(timeout=5)  # queue to'liq yozilishini kut
+        log.info(f"[wal/{self.name}] stopped, final flush queued & drained")

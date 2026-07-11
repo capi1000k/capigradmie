@@ -1,0 +1,166 @@
+2026-07-11 15:13:27,920  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=0
+2026-07-11 15:13:27,920  [REGIME_BUCKETS] [0.5-0.6]: n=0  [0.6-0.7]: n=0  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 15:13:47,961  [REGIME_VALIDATION] regime=RANGING confidence=0.62 entry_price=64169.99 future_price=64187.94 return=+0.00028 threshold=0.00050 margin=-0.00022 success=True
+2026-07-11 15:13:47,961  [REGIME_VALIDATION] regime=RANGING confidence=0.62 entry_price=64169.99 future_price=64187.94 return=+0.00028 threshold=0.00050 margin=-0.00022 success=True
+2026-07-11 15:14:33,739  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=0
+2026-07-11 15:14:33,740  [REGIME_BUCKETS] [0.5-0.6]: n=0  [0.6-0.7]: n=0  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 15:14:53,789  [REGIME_VALIDATION] regime=RANGING confidence=0.68 entry_price=64187.94 future_price=64192.04 return=+0.00006 threshold=0.00050 margin=-0.00044 success=True
+2026-07-11 15:14:53,790  [REGIME_VALIDATION] regime=RANGING confidence=0.68 entry_price=64187.94 future_price=64192.04 return=+0.00006 threshold=0.00050 margin=-0.00044 success=True
+2026-07-11 15:15:11,836  [REGIME_VALIDATION] regime=TRENDING_UP confidence=0.53 entry_price=64192.02 future_price=64204.01 return=+0.00019 threshold=0.00050 margin=-0.00031 success=False
+2026-07-11 15:15:15,846  [REGIME_VALIDATION] regime=RANGING confidence=0.35 entry_price=64192.08 future_price=64204.01 return=+0.00019 threshold=0.00050 margin=-0.00031 success=True
+2026-07-11 15:15:50,378  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=0
+2026-07-11 15:15:50,378  [REGIME_BUCKETS] [0.5-0.6]: n=0  [0.6-0.7]: n=0  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 15:16:10,440  [REGIME_VALIDATION] regime=RANGING confidence=0.58 entry_price=64169.99 future_price=64168.46 return=-0.00002 threshold=0.00050 margin=-0.00048 success=True
+2026-07-11 15:16:10,441  [REGIME_VALIDATION] regime=RANGING confidence=0.58 entry_price=64169.99 future_price=64168.46 return=-0.00002 threshold=0.00050 margin=-0.00048 success=True
+2026-07-11 15:16:50,548  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=2 win_rate=100.0%
+2026-07-11 15:16:50,548  [REGIME_BUCKETS] [0.5-0.6]: n=2 pred=0.584 actual=1.000  [0.6-0.7]: n=0  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 15:16:50,549  [REGIME_BRIER] brier_score=0.1730 n=2  (0.0=perfect 0.25=random)
+2026-07-11 15:17:10,603  [REGIME_VALIDATION] regime=RANGING confidence=0.60 entry_price=64159.67 future_price=64159.67 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 15:17:50,695  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=3 win_rate=100.0%
+2026-07-11 15:17:50,695  [REGIME_BUCKETS] [0.5-0.6]: n=3 pred=0.588 actual=1.000  [0.6-0.7]: n=0  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 15:17:50,695  [REGIME_BRIER] brier_score=0.1695 n=3  (0.0=perfect 0.25=random)
+2026-07-11 15:30:30,981  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=0
+2026-07-11 15:30:30,981  [REGIME_BUCKETS] [0.5-0.6]: n=0  [0.6-0.7]: n=0  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 15:31:11,187  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=0
+2026-07-11 15:31:11,188  [REGIME_BUCKETS] [0.5-0.6]: n=0  [0.6-0.7]: n=0  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 15:31:31,236  [REGIME_VALIDATION] regime=RANGING confidence=0.56 entry_price=64178.35 future_price=64178.35 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 15:31:31,236  [REGIME_VALIDATION] regime=RANGING confidence=0.56 entry_price=64178.35 future_price=64178.35 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 15:32:11,354  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=2 win_rate=100.0%
+2026-07-11 15:32:11,354  [REGIME_BUCKETS] [0.5-0.6]: n=2 pred=0.559 actual=1.000  [0.6-0.7]: n=0  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 15:32:11,354  [REGIME_BRIER] brier_score=0.1946 n=2  (0.0=perfect 0.25=random)
+2026-07-11 15:32:31,406  [REGIME_VALIDATION] regime=RANGING confidence=0.61 entry_price=64149.99 future_price=64149.99 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 15:33:11,490  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=3 win_rate=100.0%
+2026-07-11 15:33:11,490  [REGIME_BUCKETS] [0.5-0.6]: n=2 pred=0.559 actual=1.000  [0.6-0.7]: n=1 pred=0.606 actual=1.000  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 15:33:11,490  [REGIME_BRIER] brier_score=0.1816 n=3  (0.0=perfect 0.25=random)
+2026-07-11 15:33:31,536  [REGIME_VALIDATION] regime=RANGING confidence=0.66 entry_price=64149.99 future_price=64149.99 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 15:34:11,629  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=4 win_rate=100.0%
+2026-07-11 15:34:11,629  [REGIME_BUCKETS] [0.5-0.6]: n=2 pred=0.559 actual=1.000  [0.6-0.7]: n=2 pred=0.631 actual=1.000  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 15:34:11,629  [REGIME_BRIER] brier_score=0.1659 n=4  (0.0=perfect 0.25=random)
+2026-07-11 15:34:31,680  [REGIME_VALIDATION] regime=RANGING confidence=0.67 entry_price=64149.99 future_price=64149.99 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 15:35:11,771  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=5 win_rate=100.0%
+2026-07-11 15:35:11,772  [REGIME_BUCKETS] [0.5-0.6]: n=2 pred=0.559 actual=1.000  [0.6-0.7]: n=3 pred=0.645 actual=1.000  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 15:35:11,772  [REGIME_BRIER] brier_score=0.1539 n=5  (0.0=perfect 0.25=random)
+2026-07-11 15:35:31,831  [REGIME_VALIDATION] regime=RANGING confidence=0.66 entry_price=64165.74 future_price=64165.74 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 15:36:11,928  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=6 win_rate=100.0%
+2026-07-11 15:36:11,928  [REGIME_BUCKETS] [0.5-0.6]: n=2 pred=0.559 actual=1.000  [0.6-0.7]: n=4 pred=0.649 actual=1.000  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 15:36:11,928  [REGIME_BRIER] brier_score=0.1476 n=6  (0.0=perfect 0.25=random)
+2026-07-11 15:36:31,972  [REGIME_VALIDATION] regime=RANGING confidence=0.80 entry_price=64165.74 future_price=64163.68 return=-0.00003 threshold=0.00050 margin=-0.00047 success=True
+2026-07-11 15:37:12,067  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=7 win_rate=100.0%
+2026-07-11 15:37:12,068  [REGIME_BUCKETS] [0.5-0.6]: n=2 pred=0.559 actual=1.000  [0.6-0.7]: n=4 pred=0.649 actual=1.000  [0.7-0.8]: n=0  [0.8-0.9]: n=1 pred=0.802 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 15:37:12,068  [REGIME_BRIER] brier_score=0.1322 n=7  (0.0=perfect 0.25=random)
+2026-07-11 15:37:32,118  [REGIME_VALIDATION] regime=RANGING confidence=0.70 entry_price=64165.90 future_price=64162.26 return=-0.00006 threshold=0.00050 margin=-0.00044 success=True
+2026-07-11 15:38:12,249  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=8 win_rate=100.0%
+2026-07-11 15:38:12,249  [REGIME_BUCKETS] [0.5-0.6]: n=2 pred=0.559 actual=1.000  [0.6-0.7]: n=4 pred=0.649 actual=1.000  [0.7-0.8]: n=1 pred=0.701 actual=1.000  [0.8-0.9]: n=1 pred=0.802 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 15:38:12,249  [REGIME_BRIER] brier_score=0.1268 n=8  (0.0=perfect 0.25=random)
+2026-07-11 15:38:32,293  [REGIME_VALIDATION] regime=RANGING confidence=0.56 entry_price=64157.04 future_price=64139.99 return=-0.00027 threshold=0.00050 margin=-0.00023 success=True
+2026-07-11 15:39:12,387  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=9 win_rate=100.0%
+2026-07-11 15:39:12,388  [REGIME_BUCKETS] [0.5-0.6]: n=3 pred=0.559 actual=1.000  [0.6-0.7]: n=4 pred=0.649 actual=1.000  [0.7-0.8]: n=1 pred=0.701 actual=1.000  [0.8-0.9]: n=1 pred=0.802 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 15:39:12,388  [REGIME_BRIER] brier_score=0.1344 n=9  (0.0=perfect 0.25=random)
+2026-07-11 15:39:32,433  [REGIME_VALIDATION] regime=RANGING confidence=0.79 entry_price=64139.99 future_price=64139.99 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 15:40:12,524  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=10 win_rate=100.0%
+2026-07-11 15:40:12,524  [REGIME_BUCKETS] [0.5-0.6]: n=3 pred=0.559 actual=1.000  [0.6-0.7]: n=4 pred=0.649 actual=1.000  [0.7-0.8]: n=2 pred=0.747 actual=1.000  [0.8-0.9]: n=1 pred=0.802 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 15:40:12,524  [REGIME_BRIER] brier_score=0.1252 n=10  (0.0=perfect 0.25=random)
+2026-07-11 15:40:32,573  [REGIME_VALIDATION] regime=RANGING confidence=0.77 entry_price=64139.99 future_price=64139.99 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 15:41:12,671  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=11 win_rate=100.0%
+2026-07-11 15:41:12,672  [REGIME_BUCKETS] [0.5-0.6]: n=3 pred=0.559 actual=1.000  [0.6-0.7]: n=4 pred=0.649 actual=1.000  [0.7-0.8]: n=3 pred=0.756 actual=1.000  [0.8-0.9]: n=1 pred=0.802 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 15:41:12,672  [REGIME_BRIER] brier_score=0.1185 n=11  (0.0=perfect 0.25=random)
+2026-07-11 15:41:32,725  [REGIME_VALIDATION] regime=RANGING confidence=0.42 entry_price=64147.23 future_price=64153.18 return=+0.00009 threshold=0.00050 margin=-0.00041 success=True
+2026-07-11 15:42:12,824  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=12 win_rate=100.0%
+2026-07-11 15:42:12,824  [REGIME_BUCKETS] [0.5-0.6]: n=3 pred=0.559 actual=1.000  [0.6-0.7]: n=4 pred=0.649 actual=1.000  [0.7-0.8]: n=3 pred=0.756 actual=1.000  [0.8-0.9]: n=1 pred=0.802 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 15:42:12,824  [REGIME_BRIER] brier_score=0.1366 n=12  (0.0=perfect 0.25=random)
+2026-07-11 15:42:32,872  [REGIME_VALIDATION] regime=RANGING confidence=0.77 entry_price=64153.18 future_price=64153.18 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 15:43:12,971  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=13 win_rate=100.0%
+2026-07-11 15:43:12,972  [REGIME_BUCKETS] [0.5-0.6]: n=3 pred=0.559 actual=1.000  [0.6-0.7]: n=4 pred=0.649 actual=1.000  [0.7-0.8]: n=4 pred=0.759 actual=1.000  [0.8-0.9]: n=1 pred=0.802 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 15:43:12,972  [REGIME_BRIER] brier_score=0.1303 n=13  (0.0=perfect 0.25=random)
+2026-07-11 15:43:33,019  [REGIME_VALIDATION] regime=RANGING confidence=0.48 entry_price=64168.15 future_price=64168.15 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 15:44:13,109  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=14 win_rate=100.0%
+2026-07-11 15:44:13,109  [REGIME_BUCKETS] [0.5-0.6]: n=3 pred=0.559 actual=1.000  [0.6-0.7]: n=4 pred=0.649 actual=1.000  [0.7-0.8]: n=4 pred=0.759 actual=1.000  [0.8-0.9]: n=1 pred=0.802 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 15:44:13,109  [REGIME_BRIER] brier_score=0.1405 n=14  (0.0=perfect 0.25=random)
+2026-07-11 15:44:33,159  [REGIME_VALIDATION] regime=RANGING confidence=0.55 entry_price=64179.99 future_price=64170.01 return=-0.00016 threshold=0.00050 margin=-0.00034 success=True
+2026-07-11 15:45:13,260  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=15 win_rate=100.0%
+2026-07-11 15:45:13,260  [REGIME_BUCKETS] [0.5-0.6]: n=4 pred=0.557 actual=1.000  [0.6-0.7]: n=4 pred=0.649 actual=1.000  [0.7-0.8]: n=4 pred=0.759 actual=1.000  [0.8-0.9]: n=1 pred=0.802 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 15:45:13,261  [REGIME_BRIER] brier_score=0.1445 n=15  (0.0=perfect 0.25=random)
+2026-07-11 15:45:33,317  [REGIME_VALIDATION] regime=RANGING confidence=0.77 entry_price=64147.99 future_price=64149.99 return=+0.00003 threshold=0.00050 margin=-0.00047 success=True
+2026-07-11 15:46:13,419  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=16 win_rate=100.0%
+2026-07-11 15:46:13,420  [REGIME_BUCKETS] [0.5-0.6]: n=4 pred=0.557 actual=1.000  [0.6-0.7]: n=4 pred=0.649 actual=1.000  [0.7-0.8]: n=5 pred=0.761 actual=1.000  [0.8-0.9]: n=1 pred=0.802 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 15:46:13,420  [REGIME_BRIER] brier_score=0.1387 n=16  (0.0=perfect 0.25=random)
+2026-07-11 15:46:33,472  [REGIME_VALIDATION] regime=RANGING confidence=0.54 entry_price=64164.54 future_price=64164.54 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:09:22,111  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=0
+2026-07-11 16:09:22,112  [REGIME_BUCKETS] [0.5-0.6]: n=0  [0.6-0.7]: n=0  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 16:09:42,157  [REGIME_VALIDATION] regime=RANGING confidence=0.75 entry_price=64183.21 future_price=64183.21 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:09:42,158  [REGIME_VALIDATION] regime=RANGING confidence=0.75 entry_price=64183.21 future_price=64183.21 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:13:08,469  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=0
+2026-07-11 16:13:08,469  [REGIME_BUCKETS] [0.5-0.6]: n=0  [0.6-0.7]: n=0  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 16:13:28,514  [REGIME_VALIDATION] regime=RANGING confidence=0.57 entry_price=64215.32 future_price=64215.32 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:13:28,514  [REGIME_VALIDATION] regime=RANGING confidence=0.57 entry_price=64215.32 future_price=64215.32 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:14:08,603  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=2 win_rate=100.0%
+2026-07-11 16:14:08,603  [REGIME_BUCKETS] [0.5-0.6]: n=2 pred=0.570 actual=1.000  [0.6-0.7]: n=0  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 16:14:08,603  [REGIME_BRIER] brier_score=0.1845 n=2  (0.0=perfect 0.25=random)
+2026-07-11 16:14:28,649  [REGIME_VALIDATION] regime=RANGING confidence=0.63 entry_price=64189.99 future_price=64189.99 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:15:08,769  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=3 win_rate=100.0%
+2026-07-11 16:15:08,769  [REGIME_BUCKETS] [0.5-0.6]: n=2 pred=0.570 actual=1.000  [0.6-0.7]: n=1 pred=0.635 actual=1.000  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 16:15:08,769  [REGIME_BRIER] brier_score=0.1674 n=3  (0.0=perfect 0.25=random)
+2026-07-11 16:15:28,806  [REGIME_VALIDATION] regime=RANGING confidence=0.47 entry_price=64209.99 future_price=64199.99 return=-0.00016 threshold=0.00050 margin=-0.00034 success=True
+2026-07-11 16:16:08,889  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=4 win_rate=100.0%
+2026-07-11 16:16:08,889  [REGIME_BUCKETS] [0.5-0.6]: n=2 pred=0.570 actual=1.000  [0.6-0.7]: n=1 pred=0.635 actual=1.000  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 16:16:08,890  [REGIME_BRIER] brier_score=0.1969 n=4  (0.0=perfect 0.25=random)
+2026-07-11 16:16:28,938  [REGIME_VALIDATION] regime=RANGING confidence=0.63 entry_price=64192.01 future_price=64191.99 return=-0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:17:09,026  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=0  RANGING: count=5 win_rate=100.0%
+2026-07-11 16:17:09,027  [REGIME_BUCKETS] [0.5-0.6]: n=2 pred=0.570 actual=1.000  [0.6-0.7]: n=2 pred=0.631 actual=1.000  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 16:17:09,027  [REGIME_BRIER] brier_score=0.1853 n=5  (0.0=perfect 0.25=random)
+2026-07-11 16:17:29,076  [REGIME_VALIDATION] regime=RANGING confidence=0.63 entry_price=64191.99 future_price=64191.01 return=-0.00002 threshold=0.00050 margin=-0.00048 success=True
+2026-07-11 16:17:52,633  [REGIME_VALIDATION] regime=TRENDING_DOWN confidence=0.41 entry_price=64191.01 future_price=64175.65 return=-0.00024 threshold=0.00050 margin=-0.00026 success=False
+2026-07-11 16:17:56,141  [REGIME_VALIDATION] regime=RANGING confidence=0.59 entry_price=64175.65 future_price=64175.65 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:18:09,172  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=1 win_rate=0.0%  RANGING: count=7 win_rate=100.0%
+2026-07-11 16:18:09,172  [REGIME_BUCKETS] [0.5-0.6]: n=3 pred=0.576 actual=1.000  [0.6-0.7]: n=3 pred=0.630 actual=1.000  [0.7-0.8]: n=0  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 16:18:09,172  [REGIME_BRIER] brier_score=0.1753 n=8  (0.0=perfect 0.25=random)
+2026-07-11 16:18:29,221  [REGIME_VALIDATION] regime=RANGING confidence=0.76 entry_price=64175.65 future_price=64175.65 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:19:09,316  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=1 win_rate=0.0%  RANGING: count=8 win_rate=100.0%
+2026-07-11 16:19:09,316  [REGIME_BUCKETS] [0.5-0.6]: n=3 pred=0.576 actual=1.000  [0.6-0.7]: n=3 pred=0.630 actual=1.000  [0.7-0.8]: n=1 pred=0.758 actual=1.000  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 16:19:09,316  [REGIME_BRIER] brier_score=0.1623 n=9  (0.0=perfect 0.25=random)
+2026-07-11 16:19:29,365  [REGIME_VALIDATION] regime=RANGING confidence=0.75 entry_price=64174.96 future_price=64174.96 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:20:09,463  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=1 win_rate=0.0%  RANGING: count=9 win_rate=100.0%
+2026-07-11 16:20:09,463  [REGIME_BUCKETS] [0.5-0.6]: n=3 pred=0.576 actual=1.000  [0.6-0.7]: n=3 pred=0.630 actual=1.000  [0.7-0.8]: n=2 pred=0.752 actual=1.000  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 16:20:09,463  [REGIME_BRIER] brier_score=0.1525 n=10  (0.0=perfect 0.25=random)
+2026-07-11 16:20:29,513  [REGIME_VALIDATION] regime=RANGING confidence=0.55 entry_price=64174.96 future_price=64174.96 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:21:09,616  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=1 win_rate=0.0%  RANGING: count=10 win_rate=100.0%
+2026-07-11 16:21:09,617  [REGIME_BUCKETS] [0.5-0.6]: n=4 pred=0.569 actual=1.000  [0.6-0.7]: n=3 pred=0.630 actual=1.000  [0.7-0.8]: n=2 pred=0.752 actual=1.000  [0.8-0.9]: n=0  [0.9-1.0]: n=0
+2026-07-11 16:21:09,617  [REGIME_BRIER] brier_score=0.1571 n=11  (0.0=perfect 0.25=random)
+2026-07-11 16:21:29,667  [REGIME_VALIDATION] regime=RANGING confidence=0.83 entry_price=64174.96 future_price=64174.96 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:22:09,766  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=1 win_rate=0.0%  RANGING: count=11 win_rate=100.0%
+2026-07-11 16:22:09,766  [REGIME_BUCKETS] [0.5-0.6]: n=4 pred=0.569 actual=1.000  [0.6-0.7]: n=3 pred=0.630 actual=1.000  [0.7-0.8]: n=2 pred=0.752 actual=1.000  [0.8-0.9]: n=1 pred=0.828 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 16:22:09,766  [REGIME_BRIER] brier_score=0.1465 n=12  (0.0=perfect 0.25=random)
+2026-07-11 16:22:29,819  [REGIME_VALIDATION] regime=RANGING confidence=0.83 entry_price=64174.96 future_price=64180.99 return=+0.00009 threshold=0.00050 margin=-0.00041 success=True
+2026-07-11 16:23:09,918  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=1 win_rate=0.0%  RANGING: count=12 win_rate=100.0%
+2026-07-11 16:23:09,918  [REGIME_BUCKETS] [0.5-0.6]: n=4 pred=0.569 actual=1.000  [0.6-0.7]: n=3 pred=0.630 actual=1.000  [0.7-0.8]: n=2 pred=0.752 actual=1.000  [0.8-0.9]: n=2 pred=0.828 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 16:23:09,918  [REGIME_BRIER] brier_score=0.1375 n=13  (0.0=perfect 0.25=random)
+2026-07-11 16:23:29,971  [REGIME_VALIDATION] regime=RANGING confidence=0.72 entry_price=64180.99 future_price=64180.99 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:24:10,067  [REGIME_STATS] TRENDING_UP: count=0  TRENDING_DOWN: count=1 win_rate=0.0%  RANGING: count=13 win_rate=100.0%
+2026-07-11 16:24:10,068  [REGIME_BUCKETS] [0.5-0.6]: n=4 pred=0.569 actual=1.000  [0.6-0.7]: n=3 pred=0.630 actual=1.000  [0.7-0.8]: n=3 pred=0.741 actual=1.000  [0.8-0.9]: n=2 pred=0.828 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 16:24:10,068  [REGIME_BRIER] brier_score=0.1333 n=14  (0.0=perfect 0.25=random)
+2026-07-11 16:24:30,121  [REGIME_VALIDATION] regime=RANGING confidence=0.42 entry_price=64180.99 future_price=64191.63 return=+0.00017 threshold=0.00050 margin=-0.00033 success=True
+2026-07-11 16:24:48,163  [REGIME_VALIDATION] regime=TRENDING_UP confidence=0.41 entry_price=64191.63 future_price=64191.63 return=+0.00000 threshold=0.00050 margin=-0.00050 success=False
+2026-07-11 16:24:51,170  [REGIME_VALIDATION] regime=RANGING confidence=0.56 entry_price=64191.63 future_price=64191.63 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:25:10,227  [REGIME_STATS] TRENDING_UP: count=1 win_rate=0.0%  TRENDING_DOWN: count=1 win_rate=0.0%  RANGING: count=15 win_rate=100.0%
+2026-07-11 16:25:10,227  [REGIME_BUCKETS] [0.5-0.6]: n=5 pred=0.568 actual=1.000  [0.6-0.7]: n=3 pred=0.630 actual=1.000  [0.7-0.8]: n=3 pred=0.741 actual=1.000  [0.8-0.9]: n=2 pred=0.828 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 16:25:10,227  [REGIME_BRIER] brier_score=0.1508 n=17  (0.0=perfect 0.25=random)
+2026-07-11 16:25:30,276  [REGIME_VALIDATION] regime=RANGING confidence=0.64 entry_price=64171.26 future_price=64177.60 return=+0.00010 threshold=0.00050 margin=-0.00040 success=True
+2026-07-11 16:26:10,375  [REGIME_STATS] TRENDING_UP: count=1 win_rate=0.0%  TRENDING_DOWN: count=1 win_rate=0.0%  RANGING: count=16 win_rate=100.0%
+2026-07-11 16:26:10,375  [REGIME_BUCKETS] [0.5-0.6]: n=5 pred=0.568 actual=1.000  [0.6-0.7]: n=4 pred=0.632 actual=1.000  [0.7-0.8]: n=3 pred=0.741 actual=1.000  [0.8-0.9]: n=2 pred=0.828 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 16:26:10,376  [REGIME_BRIER] brier_score=0.1497 n=18  (0.0=perfect 0.25=random)
+2026-07-11 16:26:30,426  [REGIME_VALIDATION] regime=RANGING confidence=0.61 entry_price=64175.85 future_price=64175.85 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:27:10,522  [REGIME_STATS] TRENDING_UP: count=1 win_rate=0.0%  TRENDING_DOWN: count=1 win_rate=0.0%  RANGING: count=17 win_rate=100.0%
+2026-07-11 16:27:10,522  [REGIME_BUCKETS] [0.5-0.6]: n=5 pred=0.568 actual=1.000  [0.6-0.7]: n=5 pred=0.627 actual=1.000  [0.7-0.8]: n=3 pred=0.741 actual=1.000  [0.8-0.9]: n=2 pred=0.828 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 16:27:10,522  [REGIME_BRIER] brier_score=0.1499 n=19  (0.0=perfect 0.25=random)
+2026-07-11 16:27:30,572  [REGIME_VALIDATION] regime=RANGING confidence=0.72 entry_price=64175.85 future_price=64175.85 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:28:10,669  [REGIME_STATS] TRENDING_UP: count=1 win_rate=0.0%  TRENDING_DOWN: count=1 win_rate=0.0%  RANGING: count=18 win_rate=100.0%
+2026-07-11 16:28:10,670  [REGIME_BUCKETS] [0.5-0.6]: n=5 pred=0.568 actual=1.000  [0.6-0.7]: n=5 pred=0.627 actual=1.000  [0.7-0.8]: n=4 pred=0.737 actual=1.000  [0.8-0.9]: n=2 pred=0.828 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 16:28:10,670  [REGIME_BRIER] brier_score=0.1463 n=20  (0.0=perfect 0.25=random)
+2026-07-11 16:28:30,719  [REGIME_VALIDATION] regime=RANGING confidence=0.78 entry_price=64175.85 future_price=64175.85 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:29:10,815  [REGIME_STATS] TRENDING_UP: count=1 win_rate=0.0%  TRENDING_DOWN: count=1 win_rate=0.0%  RANGING: count=19 win_rate=100.0%
+2026-07-11 16:29:10,816  [REGIME_BUCKETS] [0.5-0.6]: n=5 pred=0.568 actual=1.000  [0.6-0.7]: n=5 pred=0.627 actual=1.000  [0.7-0.8]: n=5 pred=0.745 actual=1.000  [0.8-0.9]: n=2 pred=0.828 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 16:29:10,816  [REGIME_BRIER] brier_score=0.1417 n=21  (0.0=perfect 0.25=random)
+2026-07-11 16:29:30,865  [REGIME_VALIDATION] regime=RANGING confidence=0.53 entry_price=64175.85 future_price=64175.85 return=+0.00000 threshold=0.00050 margin=-0.00050 success=True
+2026-07-11 16:30:10,966  [REGIME_STATS] TRENDING_UP: count=1 win_rate=0.0%  TRENDING_DOWN: count=1 win_rate=0.0%  RANGING: count=20 win_rate=100.0%
+2026-07-11 16:30:10,966  [REGIME_BUCKETS] [0.5-0.6]: n=6 pred=0.561 actual=1.000  [0.6-0.7]: n=5 pred=0.627 actual=1.000  [0.7-0.8]: n=5 pred=0.745 actual=1.000  [0.8-0.9]: n=2 pred=0.828 actual=1.000  [0.9-1.0]: n=0
+2026-07-11 16:30:10,966  [REGIME_BRIER] brier_score=0.1454 n=22  (0.0=perfect 0.25=random)

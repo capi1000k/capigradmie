@@ -20,9 +20,58 @@ import threading
 import duckdb
 import pandas as pd
 import numpy as np
+import queue
 
 from src.config import DB_PATH
 from src.logger import get_logger
+
+_write_queue: "queue.Queue" = queue.Queue()
+_writer_thread: threading.Thread | None = None
+_writer_started = False
+_writer_lock = threading.Lock()
+
+def _writer_loop() -> None:
+    log.info("[db] writer thread started")
+    while True:
+        name, flush_fn, df = _write_queue.get()
+        try:
+            n = flush_fn(df)
+            if n:
+                log.debug(f"[db/writer] {name}: flushed {n} rows")
+        except Exception as e:
+            log.error(f"[db/writer] {name} flush error: {e}")
+        finally:
+            _write_queue.task_done()
+
+
+def start_writer_thread() -> None:
+    global _writer_thread, _writer_started
+    with _writer_lock:
+        if _writer_started:
+            return
+        _writer_thread = threading.Thread(
+            target=_writer_loop, name="db-writer", daemon=True
+        )
+        _writer_thread.start()
+        _writer_started = True
+
+
+def enqueue_write(name: str, flush_fn, df) -> None:
+    """WALBuffer shu funksiyani chaqiradi — chaqiruvchi thread'da (event loop)
+    hech qanday DuckDB I/O sodir bo'lmaydi, faqat navbatga qo'yiladi."""
+    if df is None or df.empty:
+        return
+    if not _writer_started:
+        start_writer_thread()
+    _write_queue.put((name, flush_fn, df))
+
+
+def wait_for_writer_drain(timeout: float = 5.0) -> None:
+    """Graceful shutdown uchun — navbatdagi barcha yozuvlar tugashini kutadi."""
+    try:
+        _write_queue.join()
+    except Exception:
+        pass
 
 log = get_logger("db")
 
@@ -70,11 +119,11 @@ def _ensure_schema(conn: duckdb.DuckDBPyConnection) -> None:
     """)
     conn.execute("""
         CREATE TABLE IF NOT EXISTS trades (
-            timestamp     TIMESTAMPTZ PRIMARY KEY,
+            trade_id      BIGINT PRIMARY KEY,
+            timestamp     TIMESTAMPTZ,
             price         DOUBLE,
             quantity      DOUBLE,
             is_buyer_mm   BOOLEAN,
-            trade_id      BIGINT,
             exchange_ts   TIMESTAMPTZ,
             receive_ts    TIMESTAMPTZ,
             process_ts    TIMESTAMPTZ,
@@ -207,7 +256,11 @@ def insert_trades(df: pd.DataFrame) -> int:
     try:
         conn.execute("""
             INSERT OR IGNORE INTO trades
-            SELECT * FROM df
+            (trade_id, timestamp, price, quantity, is_buyer_mm,
+             exchange_ts, receive_ts, process_ts, latency_ms)
+            SELECT trade_id, timestamp, price, quantity, is_buyer_mm,
+                   exchange_ts, receive_ts, process_ts, latency_ms
+            FROM df
         """)
         return len(df)
     except Exception as e:
