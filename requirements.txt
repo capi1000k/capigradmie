@@ -20,3 +20,11 @@ colorlog>=6.8.0
 # Optional: faster matplotlib preview
 matplotlib>=3.8.0
 requests>=2.31.0
+
+# Machine Learning - AI IJC Challenge
+torch>=2.0.0
+torchvision>=0.15.0
+Pillow>=9.0.0
+scikit-learn>=1.3.0
+tqdm>=4.66.0
+albumentations>=1.3.0
