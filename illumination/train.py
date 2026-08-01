@@ -57,6 +57,9 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--device", default="auto", help="auto | cuda | cpu | mps")
     p.add_argument("--no-amp", action="store_true", help="Mixed precision'ni o'chirish")
     p.add_argument("--no-pretrained", action="store_true")
+    p.add_argument("--brightness-aug", type=float, default=0.0,
+                   help="Brightness/contrast jitter kuchi. Faqat diagnose.py label ekspozitsiyaga "
+                        "bog'liq EMASligini ko'rsatgandan keyin yoqing (masalan 0.2).")
     return p.parse_args()
 
 
@@ -134,7 +137,7 @@ def main() -> None:
         target_folds = {int(x) for x in args.train_folds.split(",") if x.strip() != ""}
 
     skf = StratifiedKFold(n_splits=args.folds, shuffle=True, random_state=args.seed)
-    train_tf = build_transforms(args.img_size, train=True)
+    train_tf = build_transforms(args.img_size, train=True, brightness_aug=args.brightness_aug)
     val_tf = build_transforms(args.img_size, train=False)
 
     # OOF (out-of-fold) bashoratlar — CV natijasini halol baholash uchun

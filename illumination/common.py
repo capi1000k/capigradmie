@@ -95,12 +95,17 @@ class ImageDataset(Dataset):
         return tensor, int(self.labels[i])
 
 
-def build_transforms(img_size: int, train: bool):
-    """MUHIM: yoritilganlikni sinflashda brightness/contrast augmentatsiya QILINMAYDI.
+def build_transforms(img_size: int, train: bool, brightness_aug: float = 0.0):
+    """Standart holatda brightness/contrast augmentatsiya QILINMAYDI.
 
-    ColorJitter(brightness=...) yoki RandomAutocontrast aynan bashorat qilinayotgan
-    belgini buzadi va `dark` rasmni `normal`ga aylantirib, labelni yolg'onga chiqaradi.
-    Shuning uchun faqat geometrik augmentatsiyalar ishlatiladi.
+    Agar label global ekspozitsiya bo'lsa, ColorJitter(brightness=...) aynan
+    bashorat qilinayotgan belgini buzadi va `dark` rasmni `normal`ga aylantirib
+    labelni yolg'onga chiqaradi.
+
+    LEKIN: agar diagnose.py sinflar bo'yicha mean_lum taqsimoti kuchli ustma-ust
+    tushishini ko'rsatsa, label ekspozitsiyaga bog'liq emas — o'shanda yumshoq
+    brightness jitter xavfsiz va foydali regularizatsiyaga aylanadi.
+    Shu holat uchun `brightness_aug` (masalan 0.2) parametri qo'shilgan.
     """
     norm = transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD)
 
@@ -113,17 +118,23 @@ def build_transforms(img_size: int, train: bool):
             ]
         )
 
-    return transforms.Compose(
-        [
-            # Butun rasmni ko'ramiz: kesib olish global yorug'lik statistikasini o'zgartiradi,
-            # shuning uchun agressiv RandomResizedCrop o'rniga yumshoq scale ishlatamiz.
-            transforms.Resize((img_size, img_size)),
-            transforms.RandomHorizontalFlip(p=0.5),
-            transforms.RandomAffine(degrees=8, translate=(0.05, 0.05), scale=(0.92, 1.08)),
-            transforms.ToTensor(),
-            norm,
-        ]
-    )
+    aug = [
+        # Butun rasmni ko'ramiz: kesib olish global yorug'lik statistikasini o'zgartiradi,
+        # shuning uchun agressiv RandomResizedCrop o'rniga yumshoq scale ishlatamiz.
+        transforms.Resize((img_size, img_size)),
+        transforms.RandomHorizontalFlip(p=0.5),
+        transforms.RandomAffine(degrees=8, translate=(0.05, 0.05), scale=(0.92, 1.08)),
+    ]
+    if brightness_aug > 0:
+        aug.append(
+            transforms.ColorJitter(
+                brightness=brightness_aug,
+                contrast=brightness_aug,
+                saturation=brightness_aug * 0.5,
+            )
+        )
+    aug += [transforms.ToTensor(), norm]
+    return transforms.Compose(aug)
 
 
 def build_model(model_name: str, num_classes: int, pretrained: bool = True):
